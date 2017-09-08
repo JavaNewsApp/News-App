@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.view.Menu;
@@ -15,11 +14,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
-
+/**
+ * Created by 金子童 on 2017/9/8.
+ */
 public class Details extends AppCompatActivity {
 
     private WebView webView;
-    private String weburl;
     private String title;
     private String source;
     private boolean isLiked;
@@ -42,14 +42,11 @@ public class Details extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // 根据传入的参数再去加载新的网页
                 view.loadUrl(url);
-                // 表示当前WebView可以处理打开新网页的请求，不用借助系统浏览器
                 return true;
             }
         });
         webView.loadUrl(source);
-        //webView.loadUrl("http://www.indiatimes.com/health/healthyliving/things-you-should-and-shouldn-t-say-to-someone-struggling-with-an-psychiatric-disorder-258915.html");
     }
 
     @Override
@@ -112,7 +109,6 @@ public class Details extends AppCompatActivity {
             intent.setType("text/plain"); // 纯文本
         } else {
             File f = new File(imgPath);
-            if(!f.exists()) Log.i("hh", "kkkkkkkkk");
             if (f != null && f.exists() && f.isFile()) {
                 intent.setType("image/jpg");
                 Uri u = Uri.fromFile(f);
@@ -130,7 +126,6 @@ public class Details extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("likeData", isLiked);
         setResult(RESULT_OK, intent);
-        //Toast.makeText(this,"It's here",Toast.LENGTH_SHORT).show();
         finish();
     }
 

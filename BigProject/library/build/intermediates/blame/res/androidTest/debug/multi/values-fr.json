@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/steven/Desktop/Big/YouNews/BigProject/library/build/intermediates/res/merged/androidTest/debug/values-fr/values-fr.xml",
+        "outputFile": "D:\\Users\\steven\\Documents\\大学课程\\小学期\\大二\\Java程序设计与训练\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fr\\values-fr.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 128
                 },
                 "from": {
-                    "file": "/Users/steven/Desktop/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Users\\steven\\Documents\\大学课程\\小学期\\大二\\Java程序设计与训练\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "/Users/steven/Desktop/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Users\\steven\\Documents\\大学课程\\小学期\\大二\\Java程序设计与训练\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 285
                 },
                 "from": {
-                    "file": "/Users/steven/Desktop/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Users\\steven\\Documents\\大学课程\\小学期\\大二\\Java程序设计与训练\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -62,7 +62,7 @@
         ]
     },
     {
-        "outputFile": "/Users/steven/Documents/大学课程/小学期/大二/Java程序设计与训练/Big/YouNews/BigProject/library/build/intermediates/res/merged/androidTest/debug/values-fr/values-fr.xml",
+        "outputFile": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
         "map": [
             {
                 "to": {
@@ -73,7 +73,7 @@
                     "endOffset": 128
                 },
                 "from": {
-                    "file": "/Users/steven/Documents/大学课程/小学期/大二/Java程序设计与训练/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -92,7 +92,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "/Users/steven/Documents/大学课程/小学期/大二/Java程序设计与训练/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -111,7 +111,131 @@
                     "endOffset": 285
                 },
                 "from": {
-                    "file": "/Users/steven/Documents/大学课程/小学期/大二/Java程序设计与训练/Big/YouNews/BigProject/library/build/intermediates/bundles/debug/res/values-fr/values-fr.xml",
+                    "file": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 206,
+                        "endColumn": 83,
+                        "endOffset": 285
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 77,
+                    "endOffset": 128
+                },
+                "from": {
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 77,
+                        "endOffset": 128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 133,
+                    "endColumn": 72,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 133,
+                        "endColumn": 72,
+                        "endOffset": 201
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 206,
+                    "endColumn": 83,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 206,
+                        "endColumn": 83,
+                        "endOffset": 285
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "D:\\Users\\steven\\Desktop\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fr\\values-fr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 77,
+                    "endOffset": 128
+                },
+                "from": {
+                    "file": "D:\\Users\\steven\\Desktop\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 77,
+                        "endOffset": 128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 133,
+                    "endColumn": 72,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "D:\\Users\\steven\\Desktop\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 133,
+                        "endColumn": 72,
+                        "endOffset": 201
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 206,
+                    "endColumn": 83,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "D:\\Users\\steven\\Desktop\\Big\\YouNews\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

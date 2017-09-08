@@ -89,7 +89,7 @@ public class Favorites extends AppCompatActivity {
                         .getColumnIndex("source"));
                 String image = cursor.getString(cursor
                         .getColumnIndex("image"));
-                long id = (long)cursor.getInt(cursor
+                String id = cursor.getString(cursor
                         .getColumnIndex("id"));
                 newses.add(new News(title, origin, image, id, category, src));
             } while (cursor.moveToNext());
@@ -148,7 +148,6 @@ public class Favorites extends AppCompatActivity {
             final ViewHolder viewHolder;
             if (null == convertView) {
                 viewHolder = new ViewHolder();
-                //convertView = getLayoutInflater().inflate(R.layout.image_list_item, parent, false);
                 convertView = getLayoutInflater().inflate(R.layout.news_item, parent, false);
 
                 viewHolder.imageView = (ImageView) convertView.findViewById(R.id.news_image);

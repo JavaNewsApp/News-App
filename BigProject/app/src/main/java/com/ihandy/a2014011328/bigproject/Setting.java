@@ -62,12 +62,7 @@ public class Setting extends PreferenceActivity implements OnSharedPreferenceCha
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        if (key.equals(Consts.EDIT_KEY)) {
-//            mEtPreference.setSummary(
-//                    sharedPreferences.getString(key, "20"));
-//        } else if(key.equals(Consts.LIST_KEY)) {
-//            mListPreference.setSummary(sharedPreferences.getString(key, ""));
-//        }
+
     }
 
     @Override

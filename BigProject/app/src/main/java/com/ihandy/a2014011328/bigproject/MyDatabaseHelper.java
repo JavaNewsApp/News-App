@@ -17,11 +17,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "source text, "
 			+ "like integer, "
 			+ "category text)";
-	
-//	public static final String CREATE_CATEGORY = "create table Category ("
-//			+ "id integer primary key autoincrement, "
-//			+ "category_name text, "
-//			+ "category_code integer)";
+
 
 	private Context mContext;
 

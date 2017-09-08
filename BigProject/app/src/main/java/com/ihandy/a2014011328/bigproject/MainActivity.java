@@ -88,12 +88,9 @@ public class MainActivity extends AppCompatActivity {
         switch(requestCode){
             case 6:
                 if(resultCode == RESULT_OK){
-                    String gl = data.getStringExtra("gl");
-                    Log.i("here","Get?");
                     finish();
                     Intent intent0 = new Intent(MainActivity.this, MainActivity.class);
                     startActivity(intent0);
-                    Log.i("here", "Get!");
                 }
                 break;
             default:
