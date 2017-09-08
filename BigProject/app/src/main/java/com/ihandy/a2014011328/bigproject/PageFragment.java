@@ -194,9 +194,9 @@ public class PageFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getActivity(),Details.class);
                     //传出的参数有：title, url, isLiked
-
+                    Log.i("okok", "fuck");
                     intent.putExtra("title", news.getTitle());
-                    intent.putExtra("source", news.getId());
+                    intent.putExtra("source", news.getSource());
                     intent.putExtra("isLiked", news.getIsLiked());
                     startActivityForResult(intent, 11);
 
