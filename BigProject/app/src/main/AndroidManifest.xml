@@ -20,11 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FunctionActivity"/>
         <activity android:name=".AboutMe" />
         <activity android:name=".CategoryManager" />
         <activity android:name=".Favorites" />
         <activity android:name="com.ihandy.a2014011328.bigproject.Setting"/>
         <activity android:name=".Details"></activity>
+
     </application>
 
 </manifest>

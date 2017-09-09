@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\Andriod_Application\git\BigProject\library\src\main\assets"/><source path="D:\Andriod_Application\git\BigProject\library\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\Andriod_Application\git\BigProject\library\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/yu/News-App/BigProject/library/src/main/assets"/><source path="/home/yu/News-App/BigProject/library/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/home/yu/News-App/BigProject/library/src/release/assets"/></dataSet></merger>
