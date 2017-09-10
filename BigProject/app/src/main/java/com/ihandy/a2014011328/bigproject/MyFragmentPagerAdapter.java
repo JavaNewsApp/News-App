@@ -15,29 +15,27 @@ import android.util.Log;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    public int COUNT = 7;
+    public int COUNT = 12;
     public int num;
-    public static String[] titles00 = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};
-    public static String[] titles03 = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};// For database
-    public static String[] titles01 = new String[]{"科技", "教育", "军事", "国内","社会","文化","国际", "汽车", "体育", "财经", "健康", "娱乐"};
-    public static String[] titles02 = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};
-    public static String[] titles  = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};   // For users
-    public static String[] titles1 = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};  // For developers
+
+    public static String[] categorys_show = new String[20];
+    public static String[] categorys = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};
+    public static String[] titles_show = new String[20];
+    public static String[] titles = new String[]{"科技", "教育", "军事", "国内","社会","文化","国际", "汽车", "体育", "财经", "健康", "娱乐"};
     private Context context;
 
     public MyFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean is[] = new boolean[7];
+        boolean is[] = new boolean[12];
         num = 0;
-        for(int i =1;i<8;i++){
-            is[i-1] = settings.getBoolean("s"+i,true);
-            if(is[i-1] == true) {
+        for(int i = 1; i < 13; i++){
+            is[i-1] = settings.getBoolean("s"+i, true);
+            if(is[i - 1] == true) {
                 num++;
-                titles[num-1] = titles01[i-1];
-                titles1[num-1] = titles02[i-1];
-                titles00[num-1] = titles03[i-1];
+                titles_show[num - 1] = titles[i-1];
+                categorys_show[num - 1] = categorys[i-1];
             }
             Log.i("here","The settings of "+i+" is "+is[i-1]);
         }

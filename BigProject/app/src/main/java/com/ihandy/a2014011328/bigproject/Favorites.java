@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,10 +30,10 @@ public class Favorites extends AppCompatActivity {
     public static final String ARGS_PAGE = "args_page";
     private static final int RESULT_OK = -1;
     private Handler handler = new Handler();
-    private ArrayList<News> newses = new ArrayList<>();
+    private ArrayList<New> newses = new ArrayList<>();
     private ListView listView;
     private boolean save;
-    private News news;
+    private New news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +52,15 @@ public class Favorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 news = newses.get(position);
-
                 if (news.getSource() == "null") {
                     Toast.makeText(Favorites.this, "Sorry, no more details.",
                             Toast.LENGTH_SHORT).show();
                 } else {
-
                     Toast.makeText(Favorites.this, "You clicked:\n" + news.getTitle(),
                             Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Favorites.this, Details.class);
                     //传出的参数有：title, url, isLiked
-
+                    Log.i("okok", news.getTitle());
                     intent.putExtra("title", news.getTitle());
                     intent.putExtra("source", news.getSource());
                     intent.putExtra("isLiked", true);
@@ -91,7 +90,9 @@ public class Favorites extends AppCompatActivity {
                         .getColumnIndex("image"));
                 String id = cursor.getString(cursor
                         .getColumnIndex("id"));
-                newses.add(new News(title, origin, image, id, category, src));
+                New news = new New();
+                news.add(title, origin, image, id, category, src);
+                newses.add(news);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -159,9 +160,9 @@ public class Favorites extends AppCompatActivity {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             //异步加载图片方法
-            ImageLoader.getInstance().displayImage(newses.get(position).getImage(), viewHolder.imageView, getDisplayOption());
+            ImageLoader.getInstance().displayImage(newses.get(position).getImgsrc(), viewHolder.imageView, getDisplayOption());
             viewHolder.copyright.setText(newses.get(position).getTitle());
-            viewHolder.source.setText(newses.get(position).getOrigin());
+            viewHolder.source.setText(newses.get(position).getSource());
 
             return convertView;
         }

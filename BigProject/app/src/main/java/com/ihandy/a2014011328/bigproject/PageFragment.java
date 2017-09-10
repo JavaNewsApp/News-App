@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -30,25 +31,30 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+
 public class PageFragment extends Fragment {
+
     public static final String ARGS_PAGE = "args_page";
     private static final int RESULT_OK = -1;
     private int mPage;
 
     private Handler handler = new Handler();
-    private ArrayList<News> newses = new ArrayList<>();
-    private ListView listView;
+    private ArrayList<New> newses = new ArrayList<>();
+    ArrayList<New> tempnew = new ArrayList<New>();
     private PullToRefreshListView listView1;
     private boolean save;
-    private News news;
+    private New news;
     private int pos = 0;
+    private Retrofit retrofit;
+    private NewsService requestServices;
 
 
     public static PageFragment newInstance(int page) {
@@ -64,12 +70,17 @@ public class PageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARGS_PAGE);
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://166.111.68.66:2042/news/action/query/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        requestServices = retrofit.create(NewsService.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page,container,false);
+        View view = inflater.inflate(R.layout.fragment_page, container, false);
         listView1 = (PullToRefreshListView) view.findViewById(R.id.listView);
         listView1.setMode(PullToRefreshBase.Mode.BOTH);
         final NewsListAdapter Badapter = new NewsListAdapter();
@@ -82,50 +93,46 @@ public class PageFragment extends Fragment {
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 // 下拉的时候刷新新闻列表
 
-                ConnectivityManager cwjManager=(ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                ConnectivityManager cwjManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo info = cwjManager.getActiveNetworkInfo();
-                if (info != null && info.isAvailable()){
+                if (info != null && info.isAvailable()) {
 
-                newses.clear();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String cat = "";
-                        cat = MyFragmentPagerAdapter.titles1[mPage-1];
-                        //HttpRequest request = HttpRequest.get("http://assignment.crazz.cn/news/query?locale=en&category="+cat);
-                        HttpRequest request = HttpRequest.get("http://166.111.68.66:2042/news/action/query/latest?pageNo=" + pos + "&pageSize=30&category=" + cat);
-                        String body = request.body();
-                        try {
-                            JSONArray jsonArray = new JSONObject(body).getJSONArray("list");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = (JSONObject) jsonArray.opt(i);
-                                String title = jsonObject.getString("news_Title");
-                                String origin = jsonObject.getString("news_Source");
-                                String category = jsonObject.getString("newsClassTag");
-                                String id = jsonObject.getString("news_ID");
-                                String [] image = jsonObject.getString("news_Pictures").split(";");
-                                String src = jsonObject.getString("news_URL");
-                                newses.add(new News(title, origin, image[0], id, category, src));
-                            }
+                    newses.clear();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pos++;
+                            String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
+                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+
+                            call.enqueue(new Callback<NewsSummary>() {
+                                @Override
+                                public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                    newses.addAll(response.body().getNewsSummary());
+                                }
+
+                                @Override
+                                public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                    Log.i("LHD", "访问失败");
+                                }
+                            });
+
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     Badapter.notifyDataSetChanged();
                                 }
                             });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
-                    }
-                }).start();
+                    }).start();
                     try {
                         Thread.sleep(1500);
                     } catch (InterruptedException e) {
                     }
-                    Toast.makeText(getActivity(),"Refreshing finished",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getActivity(),"Sorry. Can not connect to the Internet,\nrefreshment failed.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Refreshing finished", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Sorry. Can not connect to the Internet,\nrefreshment failed.", Toast.LENGTH_LONG).show();
                 }
                 new FinishRefresh().execute();
             }
@@ -135,30 +142,27 @@ public class PageFragment extends Fragment {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 // 上拉的时候读取更多的新闻
 
-                ConnectivityManager cwjManager=(ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                ConnectivityManager cwjManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo info = cwjManager.getActiveNetworkInfo();
-                if (info != null && info.isAvailable()){
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        News last = newses.get(newses.size() - 1);
-                        String cat ="";
-                        cat =  MyFragmentPagerAdapter.titles1[mPage-1];
-                        //HttpRequest request = HttpRequest.get("http://assignment.crazz.cn/news/query?locale=en&category="+cat+"&max_news_id="+lastId);
-                        HttpRequest request = HttpRequest.get("http://166.111.68.66:2042/news/action/query/latest?pageNo=" + pos + "&pageSize=30&category=" + cat);
-                        
-                        String body = request.body();
-                        try {
-                            JSONArray jsonArray = new JSONObject(body).getJSONArray("list");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = (JSONObject) jsonArray.opt(i);
-                                String title = jsonObject.getString("news_Title");
-                                String origin = jsonObject.getString("news_Source");
-                                String category = jsonObject.getString("newsClassTag");
-                                String id = jsonObject.getString("news_ID");
-                                String [] image = jsonObject.getString("news_Pictures").split(";");
-                                String src = jsonObject.getString("news_URL");
-                                newses.add(new News(title, origin, image[0], id, category, src));}
+                if (info != null && info.isAvailable()) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pos++;
+                            String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
+
+                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+                            call.enqueue(new Callback<NewsSummary>() {
+                                @Override
+                                public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                    newses.addAll(response.body().getNewsSummary());
+                                }
+
+                                @Override
+                                public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                    Log.i("LHD", "访问失败");
+                                }
+                            });
 
                             handler.post(new Runnable() {
                                 @Override
@@ -166,17 +170,19 @@ public class PageFragment extends Fragment {
                                     Badapter.notifyDataSetChanged();
                                 }
                             });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
+                    }).start();
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
                     }
-                }).start();}
-                else{
-                    Toast.makeText(getActivity(),"Can not connect to the Internet >< ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Refreshing finished", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Sorry. Can not connect to the Internet,\nrefreshment failed.", Toast.LENGTH_LONG).show();
                 }
                 new FinishRefresh().execute();
             }
-
         });
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -185,95 +191,77 @@ public class PageFragment extends Fragment {
                                     int position, long id) {
                 news = newses.get(position - 1);
 
-                pos = position;
-                if(news.getSource() == "null"){
-                    Toast.makeText(getActivity(), "Sorry, no more details.",
-                            Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getActivity(), "You clicked:\n"+ news.getTitle(),
-                            Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getActivity(),Details.class);
-                    //传出的参数有：title, url, isLiked
-                    Log.i("okok", "fuck");
-                    intent.putExtra("title", news.getTitle());
-                    intent.putExtra("source", news.getSource());
-                    intent.putExtra("isLiked", news.getIsLiked());
-                    startActivityForResult(intent, 11);
-
-                }
-
+                Toast.makeText(getActivity(), "You clicked:\n" + news.getTitle(),
+                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), Details.class);
+                //传出的参数有：title, url, isLiked
+                intent.putExtra("title", news.getTitle());
+                intent.putExtra("source", news.getSource());
+                intent.putExtra("isLiked", news.getIsLiked());//////////////////??????????????
+                startActivityForResult(intent, 11);
             }
         });
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.getActivity()).build();  //获取context的方法：this.getActivity()
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.getActivity()).build();
         ImageLoader.getInstance().init(config);
 
-        ConnectivityManager cwjManager=(ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cwjManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cwjManager.getActiveNetworkInfo();
-        if (info != null && info.isAvailable()){
+        if (info != null && info.isAvailable()) {
 
             //网络请求必须写在新起的线程中
             new Thread(new Runnable() {
-            @Override
-            public void run() {
-                pos++;
-                String cat ="";
-                cat =  MyFragmentPagerAdapter.titles1[mPage-1];
-                //HttpRequest request = HttpRequest.get("http://assignment.crazz.cn/news/query?locale=en&category="+cat);
-                HttpRequest request = HttpRequest.get("http://166.111.68.66:2042/news/action/query/latest?pageNo=" + pos + "&pageSize=10&category=" + cat);
-                String body = request.body();
-                Log.i("Print", body);
+                @Override
+                public void run() {
 
-                try {
-                    JSONArray jsonArray = new JSONObject(body).getJSONArray("list");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = (JSONObject) jsonArray.opt(i);
-                        String title = jsonObject.getString("news_Title");
-                        String origin = jsonObject.getString("news_Source");
-                        String category = jsonObject.getString("newsClassTag");
-                        String id = jsonObject.getString("news_ID");
-                        String [] image = jsonObject.getString("news_Pictures").split(";");
-                        String src = jsonObject.getString("news_URL");
+                    pos++;
+                    String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
+                    Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+                    call.enqueue(new Callback<NewsSummary>() {
+                        @Override
+                        public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                            tempnew = response.body().getNewsSummary();
+                            newses.addAll(tempnew);
+                        }
 
-                        newses.add(new News(title, origin, image[0], id, category, src));
+                        @Override
+                        public void onFailure(Call<NewsSummary> call, Throwable t) {
+                            Log.i("LHD", "访问失败");
+                        }
+                    });
 
+                    for (int i = 0; i < tempnew.size(); i++) {
+                        New news = tempnew.get(i);
                         SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-                        Cursor cursor = db.query("News",null,"title = ?",new String[]{title},null,null,null);
-                        if(!cursor.moveToFirst()){
+                        Cursor cursor = db.query("News", null, "title = ?", new String[]{news.getTitle()}, null, null, null);
+                        if (!cursor.moveToFirst()) {
                             ContentValues values = new ContentValues();
-                            values.put("image", image[0]);
-                            values.put("title", title);
-                            values.put("origin", origin);
-                            values.put("source", src);
-                            values.put("id", id);
-                            values.put("category", category);
+                            values.put("image", news.getImgsrc());
+                            values.put("title", news.getTitle());
+                            values.put("origin", news.getDigest());
+                            values.put("source", news.getSource());
+                            values.put("id", news.getPostid());
+                            values.put("category", news.getCategory());
                             values.put("like", 0);
                             db.insert("News", null, values);
-                            values.clear();}
-                        else{}
+                            values.clear();
+                        } else {
+                        }
 
                     }
-
-                    //非主线程无法修改UI，所以使用handler将修改UI的代码抛到主线程做
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             Badapter.notifyDataSetChanged();
                         }
                     });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }).start();
-        }
-        else
-        {
-            Toast.makeText(getActivity(),"Can not connect to the Internet >< ",Toast.LENGTH_SHORT).show();
+            }).start();
+        } else {
+            Toast.makeText(getActivity(), "Can not connect to the Internet >< ", Toast.LENGTH_SHORT).show();
 
             SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("News", null, "category = ?", new String[]{MyFragmentPagerAdapter.titles00[mPage-1]}, null, null, null);
+            Cursor cursor = db.query("News", null, "category = ?", new String[]{MyFragmentPagerAdapter.titles_show[mPage - 1]}, null, null, null);
             if (cursor.moveToFirst()) {
                 do {
                     String title = cursor.getString(cursor
@@ -288,7 +276,9 @@ public class PageFragment extends Fragment {
                             .getColumnIndex("image"));
                     String id = cursor.getString(cursor
                             .getColumnIndex("id"));
-                    newses.add(new News(title, origin, image, id, category, src));
+                    New news = new New();
+                    news.add(title, origin, image, id, category, src);
+                    newses.add(news);
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -305,19 +295,17 @@ public class PageFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        switch(requestCode){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
             case 11:
-                if(resultCode == RESULT_OK){
-                    save = data.getBooleanExtra("likeData",false);
-                    Log.d("Here",save+"");
+                if (resultCode == RESULT_OK) {
+                    save = data.getBooleanExtra("likeData", false);
                     news.setIsLiked(save);
                 }
                 break;
             default:
         }
     }
-
 
     public DisplayImageOptions getDisplayOption() {
         DisplayImageOptions options;
@@ -349,7 +337,7 @@ public class PageFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(Void result) {
             listView1.onRefreshComplete();
         }
     }
@@ -366,7 +354,6 @@ public class PageFragment extends Fragment {
             final ViewHolder viewHolder;
             if (null == convertView) {
                 viewHolder = new ViewHolder();
-                //convertView = getLayoutInflater().inflate(R.layout.image_list_item, parent, false);
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.news_item, parent, false);
 
                 viewHolder.imageView = (ImageView) convertView.findViewById(R.id.news_image);
@@ -374,13 +361,16 @@ public class PageFragment extends Fragment {
                 viewHolder.source = (TextView) convertView.findViewById(R.id.news_source);
 
                 convertView.setTag(viewHolder);
+                if(position % 2 == 0) {
+                    convertView.setBackgroundColor(Color.parseColor("#A3A3A3"));
+                }
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             //异步加载图片方法
-            ImageLoader.getInstance().displayImage(newses.get(position).getImage(), viewHolder.imageView, getDisplayOption());
+            ImageLoader.getInstance().displayImage(newses.get(position).getImgsrc(), viewHolder.imageView, getDisplayOption());
             viewHolder.copyright.setText(newses.get(position).getTitle());
-            viewHolder.source.setText(newses.get(position).getOrigin());
+            viewHolder.source.setText(newses.get(position).getSource());
 
             return convertView;
         }
@@ -395,5 +385,6 @@ public class PageFragment extends Fragment {
             return null;
         }
     }
-
 }
+
+

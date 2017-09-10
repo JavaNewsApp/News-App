@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
+import android.util.Log;
 /**
  * Created by 金子童 on 2017/9/8.
  */
@@ -106,7 +107,7 @@ public class Details extends AppCompatActivity {
                          String imgPath) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         if (imgPath == null || imgPath.equals("")) {
-            intent.setType("text/plain"); // 纯文本
+            intent.setType("text/plain");
         } else {
             File f = new File(imgPath);
             if (f != null && f.exists() && f.isFile()) {
