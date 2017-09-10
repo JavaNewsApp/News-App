@@ -1,4 +1,4 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 
 /**
@@ -19,6 +19,7 @@ public class New {
     private String news_Video;
     private String news_Intro;
     private boolean liked;
+    private boolean clicked = false;
 
     public String getPostid() {
         return news_ID;
@@ -44,6 +45,10 @@ public class New {
         return "";
     }
 
+    public String getUrl() {
+        return news_URL;
+    }
+
     public String getSource() {
         return news_Author;
     }
@@ -63,6 +68,14 @@ public class New {
 
     public boolean getIsLiked() {
         return liked;
+    }
+
+    public boolean getIsClicked() {
+        return clicked;
+    }
+
+    public void setIsCliced(boolean clicked) {
+        this.clicked = clicked;
     }
 
     public void setPtime(String news_Time) {

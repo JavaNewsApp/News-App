@@ -1,4 +1,4 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,27 +1,37 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import android.util.Log;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
 /**
  * Created by 金子童 on 2017/9/8.
  */
 public class Details extends AppCompatActivity {
 
-    private WebView webView;
     private String title;
+    private String body;
+    private String picture;
     private String source;
     private boolean isLiked;
 
@@ -35,19 +45,32 @@ public class Details extends AppCompatActivity {
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
+        body = intent.getStringExtra("body");
         source = intent.getStringExtra("source");
+        picture = intent.getStringExtra("picture");
         isLiked = intent.getBooleanExtra("isLiked", false);
 
-        webView = (WebView) findViewById(R.id.web_view);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        webView.loadUrl(source);
+        TextView titleView = (TextView) findViewById(R.id.title_view);
+        ImageView imageView =  (ImageView) findViewById(R.id.pic_view);
+        TextView bodyView = (TextView) findViewById(R.id.body_view);
+        bodyView.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        ImageLoader.getInstance().displayImage(picture, imageView, getDisplayOption());
+        titleView.setText(title, TextView.BufferType.EDITABLE);
+        titleView.setTextSize(30);
+        bodyView.setText(body);
+    }
+
+    public DisplayImageOptions getDisplayOption() {
+        DisplayImageOptions options;
+        options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .build();
+        return options;
     }
 
     @Override

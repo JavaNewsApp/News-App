@@ -1,4 +1,4 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
 
 public class NewDetail {
 
-    private List<KeyDetail> Keywords;
-    private List<KeyDetail> bagOfWords;
+    //private List<KeyDetail> Keywords;
+    //private List<KeyDetail> bagOfWords;
     private String crawl_Source;
     private String crawl_Time;
     private String inborn_KeyWords;
     private String lang_Type;
-    private String locations;
+    //private String locations;
     private String newsClassTag;
     private String news_Author;
     private String news_Category;
@@ -27,9 +27,9 @@ public class NewDetail {
     private String news_Title;
     private String news_URL;
     private String news_Video;
-    private List<KeyDetail> persons;
+    //private List<KeyDetail> persons;
     private String repeat_ID;
-    private List<String> seggedPListOfContent;
+    //private List<String> seggedPListOfContent;
     private String seggedTitle;
     private String wordCountOfContent;
     private String wordCountOfTitle;
@@ -68,11 +68,8 @@ public class NewDetail {
     }
 
     public String getImg() {
-        return news_Pictures;
+        return news_Pictures.split(";")[0];
     }
 
-    public static class KeyDetail {
-        private String word;
-        private double score;
-    }
+
 }
