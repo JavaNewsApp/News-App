@@ -12,14 +12,7 @@ import android.preference.SwitchPreference;
 
 public class Setting extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
-   // private CheckBoxPreference mCheckPreference;
-    private SwitchPreference ss1;
-    private SwitchPreference ss2;
-    private SwitchPreference ss3;
-    private SwitchPreference ss4;
-    private SwitchPreference ss5;
-    private SwitchPreference ss6;
-    private SwitchPreference ss7;
+    private SwitchPreference [] ss = new SwitchPreference[13];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +23,22 @@ public class Setting extends PreferenceActivity implements OnSharedPreferenceCha
     }
 
     private void initPreferences() {
-        //mCheckPreference = (CheckBoxPreference) findPreference("checkbox_key");
-        ss1 = (SwitchPreference) findPreference("s1");
-        ss2 = (SwitchPreference) findPreference("s2");
-        ss3 = (SwitchPreference) findPreference("s3");
-        ss4 = (SwitchPreference) findPreference("s4");
-        ss5 = (SwitchPreference) findPreference("s5");
-        ss6 = (SwitchPreference) findPreference("s6");
-        ss7 = (SwitchPreference) findPreference("s7");
+        for(int i = 1; i <= 12; i++) {
+            ss[i] = (SwitchPreference) findPreference("s" + i);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        // Setup the initial values
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-//        ss1.setSummary(sharedPreferences.getString("s1", ""));
-//        mEtPreference.setSummary(sharedPreferences.getString(Consts.EDIT_KEY, "linc"));
-
-        // Set up a listener whenever a key changes
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        // Unregister the listener whenever a key changes
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
 

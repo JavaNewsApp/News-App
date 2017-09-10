@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fi\\values-fi.xml",
+=======
+        "outputFile": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 141
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 255
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 363
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -68,7 +84,11 @@
                     "endOffset": 442
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -87,7 +107,11 @@
                     "endOffset": 516
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -106,6 +130,7 @@
                     "endOffset": 597
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
                     "position": {
                         "startLine": 7,
@@ -226,6 +251,9 @@
                 },
                 "from": {
                     "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-fi/values-fi.xml",
+=======
+                    "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+>>>>>>> delete httprequest
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
