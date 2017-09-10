@@ -1,4 +1,4 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -36,14 +36,34 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-        ImageButton image_btn_func = (ImageButton) findViewById(R.id.function_btn);
-        image_btn_func.setOnClickListener(new View.OnClickListener() {
+        ImageButton imageButton1 = (ImageButton) findViewById(R.id.button1);
+        ImageButton imageButton2 = (ImageButton) findViewById(R.id.button2);
+        ImageButton imageButton3 = (ImageButton) findViewById(R.id.button3);
+        imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FunctionActivity.class);
-                startActivity(intent);
+            public void onClick(View arg0) {
+                Intent reg = new
+                        Intent(MainActivity.this, Favorites.class);
+                startActivity(reg);
             }
         });
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent reg = new
+                        Intent(MainActivity.this, Setting.class);
+                startActivityForResult(reg,6);
+            }
+        });
+        imageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent reg = new
+                        Intent(MainActivity.this, AboutMe.class);
+                startActivity(reg);
+            }
+        });
+
     }
 
     @Override

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ihandy.a2014011328.bigproject.Details">
+    tools:context="com.example.ForMoreNews.bigproject.Details">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,11 +30,30 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <WebView
-        android:id="@+id/web_view"
+    <TextView
+        android:id="@+id/title_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"/>
+        android:layout_height="40dp"
+        android:textSize="35px"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/pic_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/title_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/body_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scrollbars = "vertical"
+        android:fadeScrollbars="false"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/pic_view" />
 
 </RelativeLayout>

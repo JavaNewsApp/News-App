@@ -1,10 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "outputFile": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-nl\\values-nl.xml",
-=======
         "outputFile": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-nl\\values-nl.xml",
->>>>>>> delete httprequest
         "map": [
             {
                 "to": {
@@ -15,11 +11,7 @@
                     "endOffset": 129
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -38,11 +30,7 @@
                     "endOffset": 197
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -61,73 +49,7 @@
                     "endOffset": 282
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 202,
-                        "endColumn": 84,
-                        "endOffset": 282
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/home/yu/News-App/BigProject/library/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-nl/values-nl.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 78,
-                    "endOffset": 129
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-nl/values-nl.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 78,
-                        "endOffset": 129
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 134,
-                    "endColumn": 67,
-                    "endOffset": 197
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-nl/values-nl.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 134,
-                        "endColumn": 67,
-                        "endOffset": 197
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 202,
-                    "endColumn": 84,
-                    "endOffset": 282
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-nl/values-nl.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

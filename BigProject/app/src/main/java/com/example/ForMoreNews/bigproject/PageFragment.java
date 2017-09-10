@@ -1,4 +1,4 @@
-package com.ihandy.a2014011328.bigproject;
+package com.example.ForMoreNews.bigproject;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -48,13 +48,14 @@ public class PageFragment extends Fragment {
 
     private Handler handler = new Handler();
     private ArrayList<New> newses = new ArrayList<>();
-    ArrayList<New> tempnew = new ArrayList<New>();
+    private ArrayList<New> tempnew = new ArrayList<>();
     private PullToRefreshListView listView1;
     private boolean save;
     private New news;
     private int pos = 0;
     private Retrofit retrofit;
     private NewsService requestServices;
+    private NewDetail detail;
 
 
     public static PageFragment newInstance(int page) {
@@ -126,11 +127,7 @@ public class PageFragment extends Fragment {
 
                         }
                     }).start();
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                    }
-                    Toast.makeText(getActivity(), "Refreshing finished", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(getActivity(), "Sorry. Can not connect to the Internet,\nrefreshment failed.", Toast.LENGTH_LONG).show();
                 }
@@ -173,11 +170,7 @@ public class PageFragment extends Fragment {
 
                         }
                     }).start();
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                    }
-                    Toast.makeText(getActivity(), "Refreshing finished", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(getActivity(), "Sorry. Can not connect to the Internet,\nrefreshment failed.", Toast.LENGTH_LONG).show();
                 }
@@ -190,15 +183,33 @@ public class PageFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 news = newses.get(position - 1);
+                news.setIsCliced(true);
 
                 Toast.makeText(getActivity(), "You clicked:\n" + news.getTitle(),
                         Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Details.class);
-                //传出的参数有：title, url, isLiked
-                intent.putExtra("title", news.getTitle());
-                intent.putExtra("source", news.getSource());
-                intent.putExtra("isLiked", news.getIsLiked());//////////////////??????????????
-                startActivityForResult(intent, 11);
+
+                Log.i("ID", news.getPostid());
+                Call<NewDetail> call = requestServices.getNewDetail(news.getPostid());
+                call.enqueue(new Callback<NewDetail>() {
+                    @Override
+                    public void onResponse(Call<NewDetail> call, Response<NewDetail> response) {
+                        detail = response.body();
+
+                        Intent intent = new Intent(getActivity(), Details.class);
+
+                        intent.putExtra("title", detail.getTitle());
+                        intent.putExtra("body", detail.getBody());
+                        intent.putExtra("source", detail.getSource());
+                        intent.putExtra("picture", detail.getImg());
+                        intent.putExtra("isLiked", news.getIsLiked());
+                        startActivityForResult(intent, 11);
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewDetail> call, Throwable t) {
+                        Log.i("LHD", t.getMessage());
+                    }
+                });
             }
         });
 
@@ -238,8 +249,8 @@ public class PageFragment extends Fragment {
                             ContentValues values = new ContentValues();
                             values.put("image", news.getImgsrc());
                             values.put("title", news.getTitle());
-                            values.put("origin", news.getDigest());
-                            values.put("source", news.getSource());
+                            values.put("origin", news.getSource());
+                            values.put("source", news.getUrl());
                             values.put("id", news.getPostid());
                             values.put("category", news.getCategory());
                             values.put("like", 0);
@@ -310,12 +321,12 @@ public class PageFragment extends Fragment {
     public DisplayImageOptions getDisplayOption() {
         DisplayImageOptions options;
         options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .considerExifParams(true) //是否考虑JPEG图像EXIF参数（旋转，翻转）
-                .imageScaleType(ImageScaleType.EXACTLY)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.ARGB_8888)//设置图片的解码类型//
-                .build();//构建完成
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .build();
         return options;
     }
 
@@ -361,7 +372,7 @@ public class PageFragment extends Fragment {
                 viewHolder.source = (TextView) convertView.findViewById(R.id.news_source);
 
                 convertView.setTag(viewHolder);
-                if(position % 2 == 0) {
+                if(newses.get(position).getIsClicked() == true) {
                     convertView.setBackgroundColor(Color.parseColor("#A3A3A3"));
                 }
             } else {

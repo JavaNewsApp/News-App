@@ -1,10 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "outputFile": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
-=======
         "outputFile": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
->>>>>>> delete httprequest
         "map": [
             {
                 "to": {
@@ -15,11 +11,7 @@
                     "endOffset": 126
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -38,11 +30,7 @@
                     "endOffset": 199
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -61,73 +49,7 @@
                     "endOffset": 280
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 204,
-                        "endColumn": 80,
-                        "endOffset": 280
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/home/yu/News-App/BigProject/library/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 75,
-                    "endOffset": 126
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-pt-rBR/values-pt-rBR.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 75,
-                        "endOffset": 126
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 131,
-                    "endColumn": 72,
-                    "endOffset": 199
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-pt-rBR/values-pt-rBR.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 131,
-                        "endColumn": 72,
-                        "endOffset": 199
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 204,
-                    "endColumn": 80,
-                    "endOffset": 280
-                },
-                "from": {
-                    "file": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/values-pt-rBR/values-pt-rBR.xml",
-=======
                     "file": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
->>>>>>> delete httprequest
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

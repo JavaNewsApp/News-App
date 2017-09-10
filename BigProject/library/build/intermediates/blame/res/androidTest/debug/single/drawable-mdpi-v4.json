@@ -1,29 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "/home/yu/News-App/BigProject/library/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/default_ptr_rotate.png",
-        "source": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/drawable-mdpi-v4/default_ptr_rotate.png"
-    },
-    {
-        "merged": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
-        "source": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
-    },
-    {
-        "merged": "/home/yu/News-App/BigProject/library/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/indicator_arrow.png",
-        "source": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/drawable-mdpi-v4/indicator_arrow.png"
-    },
-    {
-        "merged": "/home/yu/News-App/BigProject/library/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/default_ptr_flip.png",
-        "source": "/home/yu/News-App/BigProject/library/build/intermediates/bundles/debug/res/drawable-mdpi-v4/default_ptr_flip.png"
-    },
-    {
-        "merged": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
-        "source": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
-    },
-    {
-        "merged": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
-        "source": "/home/yu/News-App/BigProject/D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
-=======
         "merged": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
         "source": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
     },
@@ -34,6 +10,5 @@
     {
         "merged": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
         "source": "D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
->>>>>>> delete httprequest
     }
 ]
