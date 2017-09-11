@@ -18,4 +18,8 @@ public interface NewsService {
             @Query("pageSize") String size,
             @Query("category") String id,
             @Query("pageNo") int startPage);
+
+    @GET("search")
+    Call<NewsSummary> getNewsSearch(
+            @Query("keyword") String size);
 }

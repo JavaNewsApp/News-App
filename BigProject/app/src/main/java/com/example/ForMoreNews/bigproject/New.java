@@ -74,7 +74,7 @@ public class New {
         return clicked;
     }
 
-    public void setIsCliced(boolean clicked) {
+    public void setIsClicked(boolean clicked) {
         this.clicked = clicked;
     }
 
@@ -89,10 +89,10 @@ public class New {
     public void add(String title, String origin, String image, String id, String category, String source) {
         this.news_Pictures = image;
         this.news_Title = title;
-        this.news_Intro = origin;
+        this.news_Author = origin;
         this.news_ID = id;
         this.newsClassTag = category;
-        this.news_Author = source;
+        this.news_URL = source;
     }
 }
 

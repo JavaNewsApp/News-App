@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--中国红主题-->
+    <style name="Red_theme" parent="BaseTheme">
+        <item name="colorPrimary">@color/red_primary</item>
+        <item name="colorPrimaryDark">@color/red_primary_dark</item>
+        <item name="colorAccent">@color/red_primary_light</item>
+        <item name="colorTextLight">@color/red_text_light</item>
+        <item name="colorTextDark">@color/red_text_dark</item>
+        <item name="colorBackground">@color/comment_backgroud</item>
+        <item name="colorNavItem">@color/item_nav_red_seletor</item>
+        <item name="colorDivider">@color/comment_divider</item>
+    </style>
+
+    <!--琥珀主题-->
+    <style name="Amber_theme" parent="BaseTheme">
+        <item name="colorPrimary">@color/amber_primary</item>
+        <item name="colorPrimaryDark">@color/amber_primary_dark</item>
+        <item name="colorAccent">@color/amber_primary_light</item>
+        <item name="colorTextLight">@color/amber_text_light</item>
+        <item name="colorTextDark">@color/amber_text_dark</item>
+        <item name="colorBackground">@color/comment_backgroud</item>
+        <item name="colorNavItem">@color/item_nav_amber_seletor</item>
+        <item name="colorDivider">@color/comment_divider</item></style>
+
+    <!--APEC蓝主题-->
+    <style name="Indigo_theme" parent="BaseTheme">
+        <item name="colorPrimary">@color/indigo_primary</item>
+        <item name="colorPrimaryDark">@color/indigo_primary_dark</item>
+        <item name="colorAccent">@color/indigo_primary_light</item>
+        <item name="colorTextLight">@color/indigo_text_light</item>
+        <item name="colorTextDark">@color/indigo_text_dark</item>
+        <item name="colorBackground">@color/comment_backgroud</item>
+        <item name="colorNavItem">@color/item_nav_indigo_seletor</item>
+        <item name="colorDivider">@color/comment_divider</item></style>
+    <!--脑残粉主题-->
+    <style name="Pink_theme" parent="BaseTheme">
+        <item name="colorPrimary">@color/pink_primary</item>
+        <item name="colorPrimaryDark">@color/pink_primary_dark</item>
+        <item name="colorAccent">@color/pink_primary_light</item>
+        <item name="colorTextLight">@color/pink_text_light</item>
+        <item name="colorTextDark">@color/pink_text_dark</item>
+        <item name="colorBackground">@color/comment_backgroud</item>
+        <item name="colorNavItem">@color/item_nav_pink_seletor</item>
+        <item name="colorDivider">@color/comment_divider</item></style>
+    <!--夜间主题-->
+    <style name="Night_theme" parent="BaseTheme.Night">
+        <item name="colorPrimary">@color/black_primary</item>
+        <item name="colorPrimaryDark">@color/black_primary_dark</item>
+        <item name="colorAccent">@color/black_primary_light</item>
+        <item name="colorTextLight">@color/black_text_light</item>
+        <item name="colorTextDark">@color/black_text_dark</item>
+        <item name="colorBackground">@color/grey_800</item>
+        <item name="colorNavItem">@color/item_nav_night_seletor</item>
+        <item name="colorDivider">@color/comment_divider</item></style>
+</resources>

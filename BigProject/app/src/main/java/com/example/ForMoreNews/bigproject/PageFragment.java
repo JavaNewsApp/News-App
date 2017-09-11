@@ -48,11 +48,10 @@ public class PageFragment extends Fragment {
 
     private Handler handler = new Handler();
     private ArrayList<New> newses = new ArrayList<>();
-    private ArrayList<New> tempnew = new ArrayList<>();
-    private PullToRefreshListView listView1;
+    private PullToRefreshListView listView;
     private boolean save;
     private New news;
-    private int pos = 0;
+    private int pos = 1;
     private Retrofit retrofit;
     private NewsService requestServices;
     private NewDetail detail;
@@ -70,24 +69,28 @@ public class PageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARGS_PAGE);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://166.111.68.66:2042/news/action/query/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         requestServices = retrofit.create(NewsService.class);
+
+        mPage = getArguments().getInt(ARGS_PAGE);
+
+
     }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
-        listView1 = (PullToRefreshListView) view.findViewById(R.id.listView);
-        listView1.setMode(PullToRefreshBase.Mode.BOTH);
+        listView = (PullToRefreshListView) view.findViewById(R.id.listView);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         final NewsListAdapter Badapter = new NewsListAdapter();
-        listView1.setAdapter(Badapter);
+        listView.setAdapter(Badapter);
 
-        listView1.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
             // 下拉Pulling Down
             @Override
@@ -97,19 +100,17 @@ public class PageFragment extends Fragment {
                 ConnectivityManager cwjManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo info = cwjManager.getActiveNetworkInfo();
                 if (info != null && info.isAvailable()) {
-
                     newses.clear();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            pos++;
                             String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
-                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
 
                             call.enqueue(new Callback<NewsSummary>() {
                                 @Override
                                 public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                                    newses.addAll(response.body().getNewsSummary());
+                                    newses = response.body().getNewsSummary();
                                 }
 
                                 @Override
@@ -178,12 +179,12 @@ public class PageFragment extends Fragment {
             }
         });
 
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 news = newses.get(position - 1);
-                news.setIsCliced(true);
+                news.setIsClicked(true);
 
                 Toast.makeText(getActivity(), "You clicked:\n" + news.getTitle(),
                         Toast.LENGTH_LONG).show();
@@ -224,15 +225,13 @@ public class PageFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-
-                    pos++;
+                    Log.i("start", "1");
                     String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
-                    Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+                    Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
                     call.enqueue(new Callback<NewsSummary>() {
                         @Override
                         public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                            tempnew = response.body().getNewsSummary();
-                            newses.addAll(tempnew);
+                            newses.addAll(response.body().getNewsSummary());
                         }
 
                         @Override
@@ -241,8 +240,8 @@ public class PageFragment extends Fragment {
                         }
                     });
 
-                    for (int i = 0; i < tempnew.size(); i++) {
-                        New news = tempnew.get(i);
+                    for (int i = 0; i < newses.size(); i++) {
+                        New news = newses.get(i);
                         SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                         Cursor cursor = db.query("News", null, "title = ?", new String[]{news.getTitle()}, null, null, null);
                         if (!cursor.moveToFirst()) {
@@ -253,7 +252,7 @@ public class PageFragment extends Fragment {
                             values.put("source", news.getUrl());
                             values.put("id", news.getPostid());
                             values.put("category", news.getCategory());
-                            values.put("like", 0);
+                            values.put("like", news.getIsLiked());
                             db.insert("News", null, values);
                             values.clear();
                         } else {
@@ -349,7 +348,7 @@ public class PageFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            listView1.onRefreshComplete();
+            listView.onRefreshComplete();
         }
     }
 
@@ -397,5 +396,3 @@ public class PageFragment extends Fragment {
         }
     }
 }
-
-

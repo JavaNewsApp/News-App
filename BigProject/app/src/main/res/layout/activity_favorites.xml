@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.ForMoreNews.bigproject.Favorites">
     <android.support.v7.widget.Toolbar
@@ -21,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Favorites"
-            android:textColor="#ffffff"
+
             android:textSize="20sp"/>
+        <!--android:textColor="#ffffff"-->
 
     </android.support.v7.widget.Toolbar>
 

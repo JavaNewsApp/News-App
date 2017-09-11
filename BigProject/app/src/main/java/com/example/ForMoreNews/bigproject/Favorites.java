@@ -25,7 +25,13 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
 
-public class Favorites extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class Favorites extends BaseActivity {
 
     public static final String ARGS_PAGE = "args_page";
     private static final int RESULT_OK = -1;
@@ -34,11 +40,20 @@ public class Favorites extends AppCompatActivity {
     private ListView listView;
     private boolean save;
     private New news;
+    private Retrofit retrofit;
+    private NewsService requestServices;
+    private NewDetail detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://166.111.68.66:2042/news/action/query/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        requestServices = retrofit.create(NewsService.class);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
@@ -52,21 +67,32 @@ public class Favorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 news = newses.get(position);
-                if (news.getSource() == "null") {
-                    Toast.makeText(Favorites.this, "Sorry, no more details.",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Favorites.this, "You clicked:\n" + news.getTitle(),
-                            Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Favorites.this, Details.class);
-                    //传出的参数有：title, url, isLiked
-                    Log.i("okok", news.getTitle());
-                    intent.putExtra("title", news.getTitle());
-                    intent.putExtra("source", news.getSource());
-                    intent.putExtra("isLiked", true);
-                    startActivityForResult(intent, 2);
 
-                }
+                Toast.makeText(Favorites.this, "You clicked:\n" + news.getTitle(),
+                        Toast.LENGTH_LONG).show();
+                Log.i("ID", news.getPostid());
+                Call<NewDetail> call = requestServices.getNewDetail(news.getPostid());
+                call.enqueue(new Callback<NewDetail>() {
+                    @Override
+                    public void onResponse(Call<NewDetail> call, Response<NewDetail> response) {
+                        detail = response.body();
+
+                        Intent intent = new Intent(Favorites.this, Details.class);
+
+                        intent.putExtra("title", detail.getTitle());
+                        intent.putExtra("body", detail.getBody());
+                        intent.putExtra("source", detail.getSource());
+                        intent.putExtra("picture", detail.getImg());
+                        intent.putExtra("isLiked", true);
+                        startActivityForResult(intent, 2);
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewDetail> call, Throwable t) {
+                        Log.i("LHD", t.getMessage());
+                    }
+                });
+
 
             }
         });

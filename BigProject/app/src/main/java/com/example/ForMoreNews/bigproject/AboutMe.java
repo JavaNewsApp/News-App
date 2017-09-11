@@ -5,7 +5,7 @@ import android.os.Bundle;
 /**
  * Created by 金子童 on 2017/9/8.
  */
-public class AboutMe extends AppCompatActivity {
+public class AboutMe extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

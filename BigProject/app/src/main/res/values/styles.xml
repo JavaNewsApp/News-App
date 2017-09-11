@@ -1,18 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="BaseTheme"><!-- 设置ActionBar的颜色。 -->
+        <item name="colorPrimary">@color/colorPrimary</item><!-- 设置状态栏的颜色 -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!-- colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。 -->
+        <item name="colorAccent">@color/colorAccent</item><!--<item name="android:windowBackground">@color/grey_200</item>-->
     </style>
 
-    <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--夜间模式主题-->
+    <style name="BaseTheme.Night" parent="Theme.AppCompat.NoActionBar"></style><!--默认主题-->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
+    <style name="MyActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:actionModeBackground">?attr/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
     </style>
-
+    <style name="MyActionBarPopupDrak" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/black_backgroud</item>
+        <item name="android:textColor">@color/black_text_light</item>
+    </style>
 </resources>
+
+

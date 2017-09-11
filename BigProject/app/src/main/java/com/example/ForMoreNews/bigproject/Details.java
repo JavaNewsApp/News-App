@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import android.util.Log;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -27,7 +22,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 /**
  * Created by 金子童 on 2017/9/8.
  */
-public class Details extends AppCompatActivity {
+public class Details extends BaseActivity {
 
     private String title;
     private String body;
@@ -107,8 +102,8 @@ public class Details extends AppCompatActivity {
             SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             int pp = 0;
-            if(isLiked) pp=1;
-            else pp=0;
+            if(isLiked) pp = 1;
+            else pp = 0;
             values.put("like", pp);
             db.update("News", values, "title = ?",
                     new String[] {title});

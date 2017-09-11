@@ -5,7 +5,7 @@ import android.os.Bundle;
 /**
  * Created by 金子童 on 2017/9/8.
  */
-public class CategoryManager extends AppCompatActivity {
+public class CategoryManager extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

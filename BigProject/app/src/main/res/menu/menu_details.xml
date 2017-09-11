@@ -6,8 +6,10 @@
 
     <item
         android:id="@+id/share"
-        android:icon="@drawable/share"
+        android:icon="@android:drawable/ic_menu_share"
         android:orderInCategory="90"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:title="share"
         app:showAsAction="always" />
     <item

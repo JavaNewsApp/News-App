@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">""</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="theme_name_indigo">APEC蓝</string>
+    <string name="theme_name_red">中国红</string>
+    <string name="theme_name_pink">脑残粉</string>
+    <string name="theme_name_amber">琥珀</string>
+    <string name="theme_name_night">夜间模式</string>
+
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="theme">主题</string>
+
+    <!-- Theme -->
+    <string name="theme_tag_indigo">indigo</string>
+    <string name="theme_tag_red">red</string>
+    <string name="theme_tag_pink">pink</string>
+    <string name="theme_tag_amber">amber</string>
+    <string name="theme_tag_night">dark</string>
+
+    <string name="switch_theme">切换主题</string>
+    <string name="favorite">favorite</string>
+    <string name="aboutme">aboutme</string>
+    <string name="category">category</string>
 </resources>
