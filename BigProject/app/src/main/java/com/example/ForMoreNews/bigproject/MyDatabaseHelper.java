@@ -10,12 +10,14 @@ import android.widget.Toast;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 	public static final String CREATE_NEWS = "create table News ("
-			+ "id bigint, "
+			+ "id text, "
 			+ "image text, "
 			+ "title text, "
 			+ "origin text, "
 			+ "source text, "
-			+ "like integer, "
+			+ "like text, "
+			+ "body text, "
+			+ "name text, "
 			+ "category text)";
 
 

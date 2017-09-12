@@ -34,7 +34,7 @@ public class Details extends BaseActivity {
     private String picture;
     private String source;
     private boolean isLiked;
-    private ArrayList<String> name;
+    private ArrayList<String> name = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +61,11 @@ public class Details extends BaseActivity {
         titleView.setText(title, TextView.BufferType.EDITABLE);
         titleView.setTextSize(30);
 
-        for(int i = 0; i < name.size(); i++) {
-            body = body.replaceAll(name.get(i), "<a href='https://baike.baidu.com/item/" + name.get(i) + "'>" + name.get(i) + "</a>");
-        }
+        if(name != null)
+            for(int i = 0; i < name.size(); i++)
+                if(name.get(i) != "")
+                    body = body.replaceAll(name.get(i), "<a href='https://baike.baidu.com/item/" + name.get(i) + "'>" + name.get(i) + "</a>");
+
         body = body.replaceAll(" 　　", "\n    ");
 
         bodyView.setText(body);

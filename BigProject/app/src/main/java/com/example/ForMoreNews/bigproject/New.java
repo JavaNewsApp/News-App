@@ -1,6 +1,10 @@
 package com.example.ForMoreNews.bigproject;
 
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
 * Created by ihandysoft on 16/8/23.
 */
@@ -20,6 +24,8 @@ public class New {
     private String news_Intro;
     private boolean liked;
     private boolean clicked = false;
+    private String body = "";
+    private ArrayList<String> name = new ArrayList<>();
 
     public String getPostid() {
         return news_ID;
@@ -58,8 +64,7 @@ public class New {
     }
 
     public String getImgsrc() {
-        String [] pic = news_Pictures.split(";");
-        return pic[0];
+        return news_Pictures.split(";")[0].split("%20")[0];
     }
 
     public String getPtime() {
@@ -78,6 +83,23 @@ public class New {
         this.clicked = clicked;
     }
 
+    public void setBody(String body) {
+        this.body = body;
+
+    }
+
+    public String getBody() {
+        return this.body;
+    }
+
+    public void setName(ArrayList<String> name) {
+        this.name = name;
+    }
+
+    public ArrayList<String> getName() {
+        return name;
+    }
+
     public void setPtime(String news_Time) {
         this.news_Time = news_Time;
     }
@@ -85,14 +107,19 @@ public class New {
     public void setIsLiked(boolean like) {
         this.liked = like;
     }
-
-    public void add(String title, String origin, String image, String id, String category, String source) {
+    public void add(String title, String origin, String image, String id, String category, String source, String body, String like, String name) {
         this.news_Pictures = image;
         this.news_Title = title;
         this.news_Author = origin;
         this.news_ID = id;
         this.newsClassTag = category;
         this.news_URL = source;
+        this.body = body;
+        this.liked = Boolean.parseBoolean(like);
+        String [] _name = name.split(";");
+        for(int i = 0; i < _name.length; i++){
+            this.name.add(_name[i]);
+        }
     }
 }
 

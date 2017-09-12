@@ -56,6 +56,7 @@ public class Search extends BaseActivity {
 
         Intent intent = getIntent();
         search = intent.getStringExtra("search");
+        Log.i("search", search);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://166.111.68.66:2042/news/action/query/")
@@ -138,8 +139,15 @@ public class Search extends BaseActivity {
                         .getColumnIndex("image"));
                 String id = cursor.getString(cursor
                         .getColumnIndex("id"));
+                String body = cursor.getString(cursor
+                        .getColumnIndex("body"));
+                String like = cursor.getString(cursor
+                        .getColumnIndex("like"));
+                String name = cursor.getString(cursor
+                        .getColumnIndex("name"));
+
                 New news = new New();
-                news.add(title, origin, image, id, category, src);
+                news.add(title, origin, image, id, category, src, body, like, name);
                 search_newses.add(news);
             } while (cursor.moveToNext());
         }

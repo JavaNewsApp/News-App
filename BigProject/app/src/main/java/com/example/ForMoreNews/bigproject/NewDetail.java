@@ -69,7 +69,7 @@ public class NewDetail {
     }
 
     public String getImg() {
-        return news_Pictures.split(";")[0];
+        return news_Pictures.split(";")[0].split("%20")[0];
     }
 
     public class des {

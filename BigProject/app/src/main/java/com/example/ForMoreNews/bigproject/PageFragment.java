@@ -51,10 +51,13 @@ public class PageFragment extends Fragment {
     private PullToRefreshListView listView;
     private boolean save;
     private New news;
+    private New temp_news;
     private int pos = 1;
     private Retrofit retrofit;
     private NewsService requestServices;
     private NewDetail detail;
+    private ContentValues values;
+    private SQLiteDatabase db;
 
 
     public static PageFragment newInstance(int page) {
@@ -111,18 +114,19 @@ public class PageFragment extends Fragment {
                                 @Override
                                 public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
                                     newses = response.body().getNewsSummary();
+
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Badapter.notifyDataSetChanged();
+                                        }
+                                    });
+
                                 }
 
                                 @Override
                                 public void onFailure(Call<NewsSummary> call, Throwable t) {
                                     Log.i("LHD", "访问失败");
-                                }
-                            });
-
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Badapter.notifyDataSetChanged();
                                 }
                             });
 
@@ -154,18 +158,19 @@ public class PageFragment extends Fragment {
                                 @Override
                                 public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
                                     newses.addAll(response.body().getNewsSummary());
+
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Badapter.notifyDataSetChanged();
+                                        }
+                                    });
+
                                 }
 
                                 @Override
                                 public void onFailure(Call<NewsSummary> call, Throwable t) {
                                     Log.i("LHD", "访问失败");
-                                }
-                            });
-
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Badapter.notifyDataSetChanged();
                                 }
                             });
 
@@ -186,33 +191,21 @@ public class PageFragment extends Fragment {
                 news = newses.get(position - 1);
                 news.setIsClicked(true);
 
+                Log.i("click", "click");
                 Toast.makeText(getActivity(), "You clicked:\n" + news.getTitle(),
                         Toast.LENGTH_LONG).show();
 
-                Log.i("ID", news.getPostid());
-                Call<NewDetail> call = requestServices.getNewDetail(news.getPostid());
-                call.enqueue(new Callback<NewDetail>() {
-                    @Override
-                    public void onResponse(Call<NewDetail> call, Response<NewDetail> response) {
-                        detail = response.body();
+                Intent intent = new Intent(getActivity(), Details.class);
 
-                        Intent intent = new Intent(getActivity(), Details.class);
+                intent.putExtra("title", news.getTitle());
+                intent.putExtra("body", news.getBody());
+                intent.putExtra("source", news.getSource());
+                intent.putExtra("picture", news.getImgsrc());
+                intent.putExtra("isLiked", news.getIsLiked());
+                intent.putStringArrayListExtra("name", detail.getLink());
 
-                        intent.putExtra("title", detail.getTitle());
-                        intent.putExtra("body", detail.getBody());
-                        intent.putExtra("source", detail.getSource());
-                        intent.putExtra("picture", detail.getImg());
-                        intent.putExtra("isLiked", news.getIsLiked());
-                        intent.putStringArrayListExtra("name", detail.getLink());
+                startActivityForResult(intent, 11);
 
-                        startActivityForResult(intent, 11);
-                    }
-
-                    @Override
-                    public void onFailure(Call<NewDetail> call, Throwable t) {
-                        Log.i("LHD", t.getMessage());
-                    }
-                });
             }
         });
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.getActivity()).build();
@@ -232,6 +225,59 @@ public class PageFragment extends Fragment {
                         @Override
                         public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
                             newses.addAll(response.body().getNewsSummary());
+
+                            for (int i = 0; i < newses.size(); i++) {
+                                temp_news = newses.get(i);
+                                final int ii = i;
+
+                                db = MainActivity.dbHelper.getWritableDatabase();
+                                Cursor cursor = db.query("News", null, "title = ?", new String[]{temp_news.getTitle()}, null, null, null);
+                                values = new ContentValues();
+
+                                if (!cursor.moveToFirst()) {
+
+                                    Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                    _call.enqueue(new Callback<NewDetail>() {
+                                        @Override
+                                        public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                            detail = _response.body();
+                                            temp_news.setBody(detail.getBody());
+                                            temp_news.setName(detail.getLink());
+                                            newses.get(ii).setBody(detail.getBody());
+                                            newses.get(ii).setName(detail.getLink());
+                                            values.put("image", temp_news.getImgsrc());
+                                            values.put("title", temp_news.getTitle());
+                                            values.put("origin", temp_news.getSource());
+                                            values.put("source", temp_news.getUrl());
+                                            values.put("id", temp_news.getPostid());
+                                            values.put("category", temp_news.getCategory());
+                                            values.put("like", temp_news.getIsLiked());
+                                            values.put("body", temp_news.getBody());
+                                            String a = "";
+                                            for(int j = 0; j < temp_news.getName().size() - 1; j++) {
+                                                a += temp_news.getName().get(j);
+                                                a += ";";
+                                            }
+                                            if(temp_news.getName().size() > 0) a += temp_news.getName().get(temp_news.getName().size() - 1);
+                                            values.put("name", a);
+                                            db.insert("News", null, values);
+                                            values.clear();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<NewDetail> call, Throwable t) {
+                                            Log.i("LHD", t.getMessage());
+                                        }
+                                    });
+                                    Log.i("outbody", temp_news.getName().toString());
+                                }
+                            }
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Badapter.notifyDataSetChanged();
+                                }
+                            });
                         }
 
                         @Override
@@ -240,30 +286,7 @@ public class PageFragment extends Fragment {
                         }
                     });
 
-                    for (int i = 0; i < newses.size(); i++) {
-                        New news = newses.get(i);
-                        SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-                        Cursor cursor = db.query("News", null, "title = ?", new String[]{news.getTitle()}, null, null, null);
-                        if (!cursor.moveToFirst()) {
-                            ContentValues values = new ContentValues();
-                            values.put("image", news.getImgsrc());
-                            values.put("title", news.getTitle());
-                            values.put("origin", news.getSource());
-                            values.put("source", news.getUrl());
-                            values.put("id", news.getPostid());
-                            values.put("category", news.getCategory());
-                            values.put("like", news.getIsLiked());
-                            db.insert("News", null, values);
-                            values.clear();
-                        }
-                    }
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.i("fukkkkkkk", "run");
-                            Badapter.notifyDataSetChanged();
-                        }
-                    });
+
                 }
             }).start();
         } else {
@@ -285,8 +308,15 @@ public class PageFragment extends Fragment {
                             .getColumnIndex("image"));
                     String id = cursor.getString(cursor
                             .getColumnIndex("id"));
+                    String body = cursor.getString(cursor
+                            .getColumnIndex("body"));
+                    String like = cursor.getString(cursor
+                            .getColumnIndex("like"));
+                    String name = cursor.getString(cursor
+                            .getColumnIndex("name"));
+
                     New news = new New();
-                    news.add(title, origin, image, id, category, src);
+                    news.add(title, origin, image, id, category, src, body, like, name);
                     newses.add(news);
                 } while (cursor.moveToNext());
             }

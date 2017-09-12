@@ -117,8 +117,15 @@ public class Favorites extends BaseActivity {
                         .getColumnIndex("image"));
                 String id = cursor.getString(cursor
                         .getColumnIndex("id"));
+                String body = cursor.getString(cursor
+                        .getColumnIndex("body"));
+                String like = cursor.getString(cursor
+                        .getColumnIndex("like"));
+                String name = cursor.getString(cursor
+                        .getColumnIndex("name"));
+
                 New news = new New();
-                news.add(title, origin, image, id, category, src);
+                news.add(title, origin, image, id, category, src, body, like, name);
                 newses.add(news);
             } while (cursor.moveToNext());
         }
