@@ -48,6 +48,7 @@ public class PageFragment extends Fragment {
 
     private Handler handler = new Handler();
     private ArrayList<New> newses = new ArrayList<>();
+    private ArrayList<New> _newses = new ArrayList<>();
     private PullToRefreshListView listView;
     private boolean save;
     private New news;
@@ -115,6 +116,26 @@ public class PageFragment extends Fragment {
                                 public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
                                     newses = response.body().getNewsSummary();
 
+                                    for (int i = 0; i < newses.size(); i++) {
+                                        temp_news = newses.get(i);
+                                        final int ii = i;
+                                        Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                        _call.enqueue(new Callback<NewDetail>() {
+                                            @Override
+                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                detail = _response.body();
+                                                newses.get(ii).setBody(detail.getBody());
+                                                newses.get(ii).setName(detail.getLink());
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                Log.i("LHD", t.getMessage());
+                                            }
+                                        });
+                                    }
+
                                     handler.post(new Runnable() {
                                         @Override
                                         public void run() {
@@ -157,8 +178,27 @@ public class PageFragment extends Fragment {
                             call.enqueue(new Callback<NewsSummary>() {
                                 @Override
                                 public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                                    newses.addAll(response.body().getNewsSummary());
+                                    _newses = response.body().getNewsSummary();
+                                    newses.addAll(_newses);
+                                    for (int i = newses.size() - _newses.size(); i < newses.size(); i++) {
+                                        temp_news = newses.get(i);
+                                        final int ii = i;
+                                        Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                        _call.enqueue(new Callback<NewDetail>() {
+                                            @Override
+                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                detail = _response.body();
+                                                newses.get(ii).setBody(detail.getBody());
+                                                newses.get(ii).setName(detail.getLink());
 
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                Log.i("LHD", t.getMessage());
+                                            }
+                                        });
+                                    }
                                     handler.post(new Runnable() {
                                         @Override
                                         public void run() {

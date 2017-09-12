@@ -48,6 +48,7 @@ public class Search extends BaseActivity {
     private NewsService requestServices;
     private NewDetail detail;
     private String search;
+    private New temp_news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,26 @@ public class Search extends BaseActivity {
             @Override
             public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
                 search_newses = response.body().getNewsSummary();
+
+                for (int i = 0; i < search_newses.size(); i++) {
+                    temp_news = search_newses.get(i);
+                    final int ii = i;
+                    Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                    _call.enqueue(new Callback<NewDetail>() {
+                        @Override
+                        public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                            detail = _response.body();
+                            search_newses.get(ii).setBody(detail.getBody());
+                            search_newses.get(ii).setName(detail.getLink());
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<NewDetail> call, Throwable t) {
+                            Log.i("LHD", t.getMessage());
+                        }
+                    });
+                }
             }
 
             @Override
