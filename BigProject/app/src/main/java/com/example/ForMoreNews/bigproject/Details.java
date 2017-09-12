@@ -7,7 +7,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -29,6 +34,7 @@ public class Details extends BaseActivity {
     private String picture;
     private String source;
     private boolean isLiked;
+    private ArrayList<String> name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class Details extends BaseActivity {
         source = intent.getStringExtra("source");
         picture = intent.getStringExtra("picture");
         isLiked = intent.getBooleanExtra("isLiked", false);
+        name = intent.getStringArrayListExtra("name");
 
         TextView titleView = (TextView) findViewById(R.id.title_view);
         ImageView imageView =  (ImageView) findViewById(R.id.pic_view);
@@ -53,7 +60,17 @@ public class Details extends BaseActivity {
         ImageLoader.getInstance().displayImage(picture, imageView, getDisplayOption());
         titleView.setText(title, TextView.BufferType.EDITABLE);
         titleView.setTextSize(30);
+
+        for(int i = 0; i < name.size(); i++) {
+            body = body.replaceAll(name.get(i), "<a href='https://baike.baidu.com/item/" + name.get(i) + "'>" + name.get(i) + "</a>");
+        }
+        body = body.replaceAll(" 　　", "\n    ");
+
         bodyView.setText(body);
+
+        bodyView.setText(Html.fromHtml(body));
+        bodyView.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
     public DisplayImageOptions getDisplayOption() {

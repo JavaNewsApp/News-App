@@ -105,6 +105,7 @@ public class Search extends BaseActivity {
                         intent.putExtra("source", detail.getSource());
                         intent.putExtra("picture", detail.getImg());
                         intent.putExtra("isLiked", false);
+                        intent.putStringArrayListExtra("name", detail.getLink());
                         startActivityForResult(intent, 20);
                     }
 

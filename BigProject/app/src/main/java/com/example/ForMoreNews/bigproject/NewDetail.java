@@ -1,5 +1,6 @@
 package com.example.ForMoreNews.bigproject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class NewDetail {
     private String crawl_Time;
     private String inborn_KeyWords;
     private String lang_Type;
-    //private String locations;
+    private List<des> locations;
     private String newsClassTag;
     private String news_Author;
     private String news_Category;
@@ -27,7 +28,7 @@ public class NewDetail {
     private String news_Title;
     private String news_URL;
     private String news_Video;
-    //private List<KeyDetail> persons;
+    private List<des> persons;
     private String repeat_ID;
     //private List<String> seggedPListOfContent;
     private String seggedTitle;
@@ -71,5 +72,21 @@ public class NewDetail {
         return news_Pictures.split(";")[0];
     }
 
+    public class des {
+        String word;
+        double score;
+    }
+    public ArrayList<String> getLink() {
+        ArrayList<String> ret = new ArrayList<>();
+
+        for(int i = 0; i < persons.size(); i++){
+            ret.add(persons.get(i).word);
+        }
+        for(int i = 0; i < locations.size(); i++){
+            ret.add(locations.get(i).word);
+        }
+
+        return ret;
+    }
 
 }

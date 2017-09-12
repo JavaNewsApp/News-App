@@ -203,6 +203,8 @@ public class PageFragment extends Fragment {
                         intent.putExtra("source", detail.getSource());
                         intent.putExtra("picture", detail.getImg());
                         intent.putExtra("isLiked", news.getIsLiked());
+                        intent.putStringArrayListExtra("name", detail.getLink());
+
                         startActivityForResult(intent, 11);
                     }
 
@@ -213,7 +215,6 @@ public class PageFragment extends Fragment {
                 });
             }
         });
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.getActivity()).build();
         ImageLoader.getInstance().init(config);
 
@@ -225,7 +226,6 @@ public class PageFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i("start", "1");
                     String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
                     Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
                     call.enqueue(new Callback<NewsSummary>() {
@@ -255,13 +255,12 @@ public class PageFragment extends Fragment {
                             values.put("like", news.getIsLiked());
                             db.insert("News", null, values);
                             values.clear();
-                        } else {
                         }
-
                     }
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            Log.i("fukkkkkkk", "run");
                             Badapter.notifyDataSetChanged();
                         }
                     });
@@ -300,9 +299,9 @@ public class PageFragment extends Fragment {
                 }
             });
         }
-
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

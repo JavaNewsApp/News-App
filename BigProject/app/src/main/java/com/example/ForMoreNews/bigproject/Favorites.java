@@ -83,6 +83,7 @@ public class Favorites extends BaseActivity {
                         intent.putExtra("body", detail.getBody());
                         intent.putExtra("source", detail.getSource());
                         intent.putExtra("picture", detail.getImg());
+                        intent.putStringArrayListExtra("name", detail.getLink());
                         intent.putExtra("isLiked", true);
                         startActivityForResult(intent, 2);
                     }
