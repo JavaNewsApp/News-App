@@ -15,30 +15,29 @@ import android.util.Log;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    public int COUNT = 12;
+    public int COUNT = 13;
     public int num;
 
     public static String[] categorys_show = new String[20];
-    public static String[] categorys = new String[]{"1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};
+    public static String[] categorys = new String[]{"0", "1", "2", "3", "4","5","6","7", "8", "9", "10", "11", "12"};
     public static String[] titles_show = new String[20];
-    public static String[] titles = new String[]{"科技", "教育", "军事", "国内","社会","文化","国际", "汽车", "体育", "财经", "健康", "娱乐"};
+    public static String[] titles = new String[]{"推荐", "科技", "教育", "军事", "国内","社会","文化","国际", "汽车", "体育", "财经", "健康", "娱乐"};
     private Context context;
 
     public MyFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean is[] = new boolean[12];
+        boolean is[] = new boolean[13];
         num = 0;
-        for(int i = 1; i < 13; i++){
-            is[i-1] = settings.getBoolean("s"+i, true);
-            Log.i("is[i]", ""+is[i - 1]);
-            if(is[i - 1]) {
+        for(int i = 0; i < 13; i++){
+            is[i] = settings.getBoolean("s"+ i, true);
+            Log.i("is[i]", ""+is[i]);
+            if(is[i]) {
                 num++;
-                titles_show[num - 1] = titles[i-1];
-                categorys_show[num - 1] = categorys[i-1];
+                titles_show[num - 1] = titles[i];
+                categorys_show[num - 1] = categorys[i];
             }
-            Log.i("here","The settings of "+i+" is "+is[i-1]);
         }
         COUNT = num;
 

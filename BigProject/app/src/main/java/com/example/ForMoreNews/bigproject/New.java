@@ -22,6 +22,7 @@ public class New {
     private String news_URL;
     private String news_Video;
     private String news_Intro;
+    private String forSearch;
     private boolean liked;
     private boolean clicked = false;
     private String body = "";
@@ -81,6 +82,15 @@ public class New {
 
     public void setIsClicked(boolean clicked) {
         this.clicked = clicked;
+    }
+
+    public void setSearch(String search) {
+        this.forSearch = search;
+
+    }
+
+    public String getSearch() {
+        return this.forSearch;
     }
 
     public void setBody(String body) {

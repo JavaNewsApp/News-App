@@ -9,7 +9,7 @@ import java.util.List;
 
 public class NewDetail {
 
-    //private List<KeyDetail> Keywords;
+    private ArrayList<des> Keywords;
     //private List<KeyDetail> bagOfWords;
     private String crawl_Source;
     private String crawl_Time;
@@ -87,6 +87,20 @@ public class NewDetail {
         }
 
         return ret;
+    }
+    public String getKeywords() {
+        String key = "";
+        for(int i = 0; i < Keywords.size() - 1; i++) {
+            key += Keywords.get(i).word;
+            key += ",";
+            key += Keywords.get(i).score;
+            key += ";";
+        }
+        key += Keywords.get(Keywords.size() - 1).word;
+        key += ",";
+        key += Keywords.get(Keywords.size() - 1).score;
+        key += ";";
+        return key;
     }
 
 }

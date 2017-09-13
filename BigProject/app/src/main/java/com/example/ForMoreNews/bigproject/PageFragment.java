@@ -108,47 +108,94 @@ public class PageFragment extends Fragment {
                         @Override
                         public void run() {
                             String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
-                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
+                            if(!cat.equals("0")) {
+                                Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
 
-                            call.enqueue(new Callback<NewsSummary>() {
-                                @Override
-                                public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                                    newses = response.body().getNewsSummary();
+                                call.enqueue(new Callback<NewsSummary>() {
+                                    @Override
+                                    public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                        newses = response.body().getNewsSummary();
 
-                                    for (int i = 0; i < newses.size(); i++) {
-                                        final int ii = i;
-                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
-                                        _call.enqueue(new Callback<NewDetail>() {
+                                        for (int i = 0; i < newses.size(); i++) {
+                                            final int ii = i;
+                                            Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                            _call.enqueue(new Callback<NewDetail>() {
+                                                @Override
+                                                public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                    detail = _response.body();
+                                                    newses.get(ii).setBody(detail.getBody());
+                                                    newses.get(ii).setName(detail.getLink());
+                                                    newses.get(ii).setSearch(detail.getKeywords());
+                                                    Log.i("LHD", newses.get(ii).getBody());
+
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                    Log.i("LHD", t.getMessage());
+                                                }
+                                            });
+                                        }
+
+                                        handler.post(new Runnable() {
                                             @Override
-                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
-                                                detail = _response.body();
-                                                newses.get(ii).setBody(detail.getBody());
-                                                newses.get(ii).setName(detail.getLink());
-                                                Log.i("LHD", newses.get(ii).getBody());
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<NewDetail> call, Throwable t) {
-                                                Log.i("LHD", t.getMessage());
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
                                             }
                                         });
+
                                     }
 
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Badapter.notifyDataSetChanged();
+                                    @Override
+                                    public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                        Log.i("LHD", "访问失败");
+                                    }
+                                });
+                            }
+                            else {
+                                Call<NewsSummary> call = requestServices.getNewsSearch("北京");
+
+                                call.enqueue(new Callback<NewsSummary>() {
+                                    @Override
+                                    public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                        newses = response.body().getNewsSummary();
+
+                                        for (int i = 0; i < newses.size(); i++) {
+                                            final int ii = i;
+                                            Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                            _call.enqueue(new Callback<NewDetail>() {
+                                                @Override
+                                                public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                    detail = _response.body();
+                                                    newses.get(ii).setBody(detail.getBody());
+                                                    newses.get(ii).setName(detail.getLink());
+                                                    newses.get(ii).setSearch(detail.getKeywords());
+                                                    Log.i("LHD", newses.get(ii).getBody());
+
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                    Log.i("LHD", t.getMessage());
+                                                }
+                                            });
                                         }
-                                    });
 
-                                }
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
+                                            }
+                                        });
 
-                                @Override
-                                public void onFailure(Call<NewsSummary> call, Throwable t) {
-                                    Log.i("LHD", "访问失败");
-                                }
-                            });
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                        Log.i("LHD", "访问失败");
+                                    }
+                                });
+                            }
 
                         }
                     }).start();
@@ -172,46 +219,88 @@ public class PageFragment extends Fragment {
                         public void run() {
                             pos++;
                             String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
+                            if(!cat.equals("0")) {
+                                Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
+                                call.enqueue(new Callback<NewsSummary>() {
+                                    @Override
+                                    public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                        _newses = response.body().getNewsSummary();
+                                        newses.addAll(_newses);
+                                        for (int i = newses.size() - _newses.size(); i < newses.size(); i++) {
 
-                            Call<NewsSummary> call = requestServices.getNewsList("30", cat, pos);
-                            call.enqueue(new Callback<NewsSummary>() {
-                                @Override
-                                public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                                    _newses = response.body().getNewsSummary();
-                                    newses.addAll(_newses);
-                                    for (int i = newses.size() - _newses.size(); i < newses.size(); i++) {
+                                            final int ii = i;
+                                            Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                            _call.enqueue(new Callback<NewDetail>() {
+                                                @Override
+                                                public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                    detail = _response.body();
+                                                    newses.get(ii).setBody(detail.getBody());
+                                                    newses.get(ii).setName(detail.getLink());
+                                                    newses.get(ii).setSearch(detail.getKeywords());
 
-                                        final int ii = i;
-                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
-                                        _call.enqueue(new Callback<NewDetail>() {
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                    Log.i("LHD", t.getMessage());
+                                                }
+                                            });
+                                        }
+                                        handler.post(new Runnable() {
                                             @Override
-                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
-                                                detail = _response.body();
-                                                newses.get(ii).setBody(detail.getBody());
-                                                newses.get(ii).setName(detail.getLink());
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<NewDetail> call, Throwable t) {
-                                                Log.i("LHD", t.getMessage());
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
                                             }
                                         });
+
                                     }
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Badapter.notifyDataSetChanged();
+
+                                    @Override
+                                    public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                        Log.i("LHD", "访问失败");
+                                    }
+                                });
+                            } else {
+                                Call<NewsSummary> call = requestServices.getNewsSearch("北京");
+                                call.enqueue(new Callback<NewsSummary>() {
+                                    @Override
+                                    public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                        _newses = response.body().getNewsSummary();
+                                        newses.addAll(_newses);
+                                        for (int i = newses.size() - _newses.size(); i < newses.size(); i++) {
+
+                                            final int ii = i;
+                                            Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                            _call.enqueue(new Callback<NewDetail>() {
+                                                @Override
+                                                public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                    detail = _response.body();
+                                                    newses.get(ii).setBody(detail.getBody());
+                                                    newses.get(ii).setName(detail.getLink());
+                                                    newses.get(ii).setSearch(detail.getKeywords());
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                    Log.i("LHD", t.getMessage());
+                                                }
+                                            });
                                         }
-                                    });
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
+                                            }
+                                        });
 
-                                }
+                                    }
 
-                                @Override
-                                public void onFailure(Call<NewsSummary> call, Throwable t) {
-                                    Log.i("LHD", "访问失败");
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                        Log.i("LHD", "访问失败");
+                                    }
+                                });
+                            }
 
                         }
                     }).start();
@@ -248,6 +337,14 @@ public class PageFragment extends Fragment {
                     intent.putExtra("isLiked", Boolean.parseBoolean(like));
                 }
                 cursor.close();
+
+                ContentValues values = new ContentValues();
+
+                values.put("search", news.getSearch());
+                values.put("click", "true");
+                db.update("News", values, "title = ?",
+                        new String[] {news.getTitle()});
+
                 intent.putStringArrayListExtra("name", news.getName());
 
                 startActivityForResult(intent, 11);
@@ -266,77 +363,173 @@ public class PageFragment extends Fragment {
                 @Override
                 public void run() {
                     String cat = MyFragmentPagerAdapter.categorys_show[mPage - 1];
-                    Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
-                    call.enqueue(new Callback<NewsSummary>() {
-                        @Override
-                        public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
-                            newses.addAll(response.body().getNewsSummary());
+                    Log.i("tuijian", cat);
 
-                            for (int i = 0; i < newses.size(); i++) {
+                    if(!cat.equals("0")) {
+                        Call<NewsSummary> call = requestServices.getNewsList("30", cat, 1);
+                        call.enqueue(new Callback<NewsSummary>() {
+                            @Override
+                            public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                newses.addAll(response.body().getNewsSummary());
 
-                                final int ii = i;
+                                for (int i = 0; i < newses.size(); i++) {
 
-                                db = MainActivity.dbHelper.getWritableDatabase();
-                                Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(i).getTitle()}, null, null, null);
-                                values = new ContentValues();
+                                    final int ii = i;
 
-                                if (!cursor.moveToFirst()) {
+                                    db = MainActivity.dbHelper.getWritableDatabase();
+                                    Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(i).getTitle()}, null, null, null);
+                                    values = new ContentValues();
 
-                                    Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
-                                    _call.enqueue(new Callback<NewDetail>() {
-                                        @Override
-                                        public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
-                                            detail = _response.body();
-                                            newses.get(ii).setBody(detail.getBody());
-                                            newses.get(ii).setName(detail.getLink());
-                                            values.put("image", newses.get(ii).getImgsrc());
-                                            values.put("title", newses.get(ii).getTitle());
-                                            values.put("origin", newses.get(ii).getSource());
-                                            values.put("source", newses.get(ii).getUrl());
-                                            values.put("id", newses.get(ii).getPostid());
-                                            values.put("category", newses.get(ii).getCategory());
-                                            values.put("like", String.valueOf(newses.get(ii).getIsLiked()));
-                                            values.put("body", newses.get(ii).getBody());
-                                            values.put("click", newses.get(ii).getIsClicked());
-                                            String a = "";
-                                            for(int j = 0; j < newses.get(ii).getName().size() - 1; j++) {
-                                                a += newses.get(ii).getName().get(j);
-                                                a += ";";
+                                    if (!cursor.moveToFirst()) {
+
+                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                        _call.enqueue(new Callback<NewDetail>() {
+                                            @Override
+                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                detail = _response.body();
+                                                newses.get(ii).setBody(detail.getBody());
+                                                newses.get(ii).setName(detail.getLink());
+                                                newses.get(ii).setSearch(detail.getKeywords());
+                                                values.put("image", newses.get(ii).getImgsrc());
+                                                values.put("title", newses.get(ii).getTitle());
+                                                values.put("origin", newses.get(ii).getSource());
+                                                values.put("source", newses.get(ii).getUrl());
+                                                values.put("id", newses.get(ii).getPostid());
+                                                values.put("category", newses.get(ii).getCategory());
+                                                values.put("like", String.valueOf(newses.get(ii).getIsLiked()));
+                                                values.put("body", newses.get(ii).getBody());
+                                                values.put("click", "");
+                                                values.put("search", "");
+
+                                                String a = "";
+                                                for (int j = 0; j < newses.get(ii).getName().size() - 1; j++) {
+                                                    a += newses.get(ii).getName().get(j);
+                                                    a += ";";
+                                                }
+                                                if (newses.get(ii).getName().size() > 0)
+                                                    a += newses.get(ii).getName().get(newses.get(ii).getName().size() - 1);
+                                                values.put("name", a);
+                                                db.insert("News", null, values);
+                                                values.clear();
                                             }
-                                            if(newses.get(ii).getName().size() > 0) a += newses.get(ii).getName().get(newses.get(ii).getName().size() - 1);
-                                            values.put("name", a);
-                                            db.insert("News", null, values);
-                                            values.clear();
-                                        }
 
-                                        @Override
-                                        public void onFailure(Call<NewDetail> call, Throwable t) {
-                                            Log.i("LHD", t.getMessage());
-                                        }
-                                    });
-                                    Log.i("outbody", newses.get(i).getName().toString());
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Badapter.notifyDataSetChanged();
-                                        }
-                                    });
+                                            @Override
+                                            public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                Log.i("LHD", t.getMessage());
+                                            }
+                                        });
+                                        Log.i("outbody", newses.get(i).getName().toString());
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
+                                            }
+                                        });
+                                    }
                                 }
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Badapter.notifyDataSetChanged();
+                                    }
+                                });
                             }
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Badapter.notifyDataSetChanged();
+
+                            @Override
+                            public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                Log.i("LHD", "访问失败");
+                            }
+                        });
+                    }
+                    else{
+                        SQLiteDatabase db0 = MainActivity.dbHelper.getWritableDatabase();
+                        Cursor cursor = db0.query("News", null, "click = ?", new String[]{"true"}, null, null, null);
+                        String result;
+
+                        if (cursor.moveToFirst()) {
+                            do {
+                                String search = cursor.getString(cursor
+                                        .getColumnIndex("search"));
+                                String [] _search = search.split(";");
+
+                            } while (cursor.moveToNext());
+                        }
+                        else {
+                            result = "中国";
+                        }
+                        cursor.close();
+                        Call<NewsSummary> call = requestServices.getNewsSearch(result);
+                        call.enqueue(new Callback<NewsSummary>() {
+                            @Override
+                            public void onResponse(Call<NewsSummary> call, Response<NewsSummary> response) {
+                                newses.addAll(response.body().getNewsSummary());
+
+                                for (int i = 0; i < newses.size(); i++) {
+
+                                    final int ii = i;
+
+                                    db = MainActivity.dbHelper.getWritableDatabase();
+                                    Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(i).getTitle()}, null, null, null);
+                                    values = new ContentValues();
+
+                                    if (!cursor.moveToFirst()) {
+
+                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
+                                        _call.enqueue(new Callback<NewDetail>() {
+                                            @Override
+                                            public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
+                                                detail = _response.body();
+                                                newses.get(ii).setBody(detail.getBody());
+                                                newses.get(ii).setName(detail.getLink());
+                                                values.put("image", newses.get(ii).getImgsrc());
+                                                values.put("title", newses.get(ii).getTitle());
+                                                values.put("origin", newses.get(ii).getSource());
+                                                values.put("source", newses.get(ii).getUrl());
+                                                values.put("id", newses.get(ii).getPostid());
+                                                values.put("category", newses.get(ii).getCategory());
+                                                values.put("like", String.valueOf(newses.get(ii).getIsLiked()));
+                                                values.put("body", newses.get(ii).getBody());
+                                                values.put("click", "");
+                                                values.put("search", "");
+                                                String a = "";
+                                                for (int j = 0; j < newses.get(ii).getName().size() - 1; j++) {
+                                                    a += newses.get(ii).getName().get(j);
+                                                    a += ";";
+                                                }
+                                                if (newses.get(ii).getName().size() > 0)
+                                                    a += newses.get(ii).getName().get(newses.get(ii).getName().size() - 1);
+                                                values.put("name", a);
+                                                db.insert("News", null, values);
+                                                values.clear();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<NewDetail> call, Throwable t) {
+                                                Log.i("LHD", t.getMessage());
+                                            }
+                                        });
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Badapter.notifyDataSetChanged();
+                                            }
+                                        });
+                                    }
                                 }
-                            });
-                        }
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Badapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
 
-                        @Override
-                        public void onFailure(Call<NewsSummary> call, Throwable t) {
-                            Log.i("LHD", "访问失败");
-                        }
-                    });
-
+                            @Override
+                            public void onFailure(Call<NewsSummary> call, Throwable t) {
+                                Log.i("LHD", "访问失败");
+                            }
+                        });
+                    }
 
                 }
             }).start();

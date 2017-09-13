@@ -152,20 +152,6 @@ public class Details extends BaseActivity {
             values.put("like", pp);
             db.update("News", values, "title = ?",
                     new String[] {title});
-            Log.i("liketitle", title);
-            Cursor cursor = db.query("News", null, "title = ?", new String[]{title}, null, null, null);
-            Cursor cursor0 = db.query("News", null, null, null, null, null, null);
-
-            Log.i("likefirst", "" + cursor.moveToFirst());
-            if (cursor0.moveToFirst()) {
-                do {
-                    String like = cursor.getString(cursor
-                            .getColumnIndex("title"));
-                    Log.i("likebossdetail", like);
-
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
             return true;
         }
 

@@ -76,7 +76,7 @@ public class Favorites extends BaseActivity {
 
         SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
         Cursor cursor = db.query("News", null, "like = ?", new String[]{String.valueOf(true)}, null, null, null);
-        //Cursor cursor = db.query("News", null, null, null, null, null, null);
+
         if (cursor.moveToFirst()) {
             do {
                 String title = cursor.getString(cursor
@@ -138,7 +138,7 @@ public class Favorites extends BaseActivity {
                 .considerExifParams(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)
-                .build();//构建完成
+                .build();
         return options;
     }
 

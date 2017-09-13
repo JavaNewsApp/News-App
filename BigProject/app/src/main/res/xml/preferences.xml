@@ -2,6 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <SwitchPreference
+        android:key="s0"
+        android:defaultValue="true"
+        android:title="推荐"
+        />
+    <SwitchPreference
         android:key="s1"
         android:defaultValue="true"
         android:title="科技"

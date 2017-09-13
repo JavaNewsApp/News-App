@@ -23,7 +23,7 @@ public class Setting extends PreferenceActivity implements OnSharedPreferenceCha
     }
 
     private void initPreferences() {
-        for(int i = 1; i <= 12; i++) {
+        for(int i = 0; i <= 12; i++) {
             ss[i] = (SwitchPreference) findPreference("s" + i);
         }
     }
