@@ -1,11 +1,31 @@
 [
     {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
         "merged": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
         "merged": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
@@ -14,10 +34,6 @@
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
-    },
-    {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",

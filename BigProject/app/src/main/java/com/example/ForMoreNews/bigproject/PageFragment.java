@@ -52,7 +52,6 @@ public class PageFragment extends Fragment {
     private PullToRefreshListView listView;
     private boolean save;
     private New news;
-    private New temp_news;
     private int pos = 1;
     private Retrofit retrofit;
     private NewsService requestServices;
@@ -117,15 +116,15 @@ public class PageFragment extends Fragment {
                                     newses = response.body().getNewsSummary();
 
                                     for (int i = 0; i < newses.size(); i++) {
-                                        temp_news = newses.get(i);
                                         final int ii = i;
-                                        Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
                                         _call.enqueue(new Callback<NewDetail>() {
                                             @Override
                                             public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
                                                 detail = _response.body();
                                                 newses.get(ii).setBody(detail.getBody());
                                                 newses.get(ii).setName(detail.getLink());
+                                                Log.i("LHD", newses.get(ii).getBody());
 
                                             }
 
@@ -181,9 +180,9 @@ public class PageFragment extends Fragment {
                                     _newses = response.body().getNewsSummary();
                                     newses.addAll(_newses);
                                     for (int i = newses.size() - _newses.size(); i < newses.size(); i++) {
-                                        temp_news = newses.get(i);
+
                                         final int ii = i;
-                                        Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                        Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
                                         _call.enqueue(new Callback<NewDetail>() {
                                             @Override
                                             public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
@@ -229,9 +228,8 @@ public class PageFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 news = newses.get(position - 1);
-                news.setIsClicked(true);
+                newses.get(position - 1).setIsClicked(true);
 
-                Log.i("click", "click");
                 Toast.makeText(getActivity(), "You clicked:\n" + news.getTitle(),
                         Toast.LENGTH_LONG).show();
 
@@ -241,8 +239,16 @@ public class PageFragment extends Fragment {
                 intent.putExtra("body", news.getBody());
                 intent.putExtra("source", news.getSource());
                 intent.putExtra("picture", news.getImgsrc());
-                intent.putExtra("isLiked", news.getIsLiked());
-                intent.putStringArrayListExtra("name", detail.getLink());
+                SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+                Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(position - 1).getTitle()}, null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    String like = cursor.getString(cursor
+                            .getColumnIndex("like"));
+                    intent.putExtra("isLiked", Boolean.parseBoolean(like));
+                }
+                cursor.close();
+                intent.putStringArrayListExtra("name", news.getName());
 
                 startActivityForResult(intent, 11);
 
@@ -267,38 +273,37 @@ public class PageFragment extends Fragment {
                             newses.addAll(response.body().getNewsSummary());
 
                             for (int i = 0; i < newses.size(); i++) {
-                                temp_news = newses.get(i);
+
                                 final int ii = i;
 
                                 db = MainActivity.dbHelper.getWritableDatabase();
-                                Cursor cursor = db.query("News", null, "title = ?", new String[]{temp_news.getTitle()}, null, null, null);
+                                Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(i).getTitle()}, null, null, null);
                                 values = new ContentValues();
 
                                 if (!cursor.moveToFirst()) {
 
-                                    Call<NewDetail> _call = requestServices.getNewDetail(temp_news.getPostid());
+                                    Call<NewDetail> _call = requestServices.getNewDetail(newses.get(i).getPostid());
                                     _call.enqueue(new Callback<NewDetail>() {
                                         @Override
                                         public void onResponse(Call<NewDetail> _call, Response<NewDetail> _response) {
                                             detail = _response.body();
-                                            temp_news.setBody(detail.getBody());
-                                            temp_news.setName(detail.getLink());
                                             newses.get(ii).setBody(detail.getBody());
                                             newses.get(ii).setName(detail.getLink());
-                                            values.put("image", temp_news.getImgsrc());
-                                            values.put("title", temp_news.getTitle());
-                                            values.put("origin", temp_news.getSource());
-                                            values.put("source", temp_news.getUrl());
-                                            values.put("id", temp_news.getPostid());
-                                            values.put("category", temp_news.getCategory());
-                                            values.put("like", temp_news.getIsLiked());
-                                            values.put("body", temp_news.getBody());
+                                            values.put("image", newses.get(ii).getImgsrc());
+                                            values.put("title", newses.get(ii).getTitle());
+                                            values.put("origin", newses.get(ii).getSource());
+                                            values.put("source", newses.get(ii).getUrl());
+                                            values.put("id", newses.get(ii).getPostid());
+                                            values.put("category", newses.get(ii).getCategory());
+                                            values.put("like", String.valueOf(newses.get(ii).getIsLiked()));
+                                            values.put("body", newses.get(ii).getBody());
+                                            values.put("click", newses.get(ii).getIsClicked());
                                             String a = "";
-                                            for(int j = 0; j < temp_news.getName().size() - 1; j++) {
-                                                a += temp_news.getName().get(j);
+                                            for(int j = 0; j < newses.get(ii).getName().size() - 1; j++) {
+                                                a += newses.get(ii).getName().get(j);
                                                 a += ";";
                                             }
-                                            if(temp_news.getName().size() > 0) a += temp_news.getName().get(temp_news.getName().size() - 1);
+                                            if(newses.get(ii).getName().size() > 0) a += newses.get(ii).getName().get(newses.get(ii).getName().size() - 1);
                                             values.put("name", a);
                                             db.insert("News", null, values);
                                             values.clear();
@@ -309,7 +314,13 @@ public class PageFragment extends Fragment {
                                             Log.i("LHD", t.getMessage());
                                         }
                                     });
-                                    Log.i("outbody", temp_news.getName().toString());
+                                    Log.i("outbody", newses.get(i).getName().toString());
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Badapter.notifyDataSetChanged();
+                                        }
+                                    });
                                 }
                             }
                             handler.post(new Runnable() {
@@ -354,9 +365,11 @@ public class PageFragment extends Fragment {
                             .getColumnIndex("like"));
                     String name = cursor.getString(cursor
                             .getColumnIndex("name"));
+                    String click = cursor.getString(cursor
+                            .getColumnIndex("click"));
 
                     New news = new New();
-                    news.add(title, origin, image, id, category, src, body, like, name);
+                    news.add(title, origin, image, id, category, src, body, like, name, click);
                     newses.add(news);
                 } while (cursor.moveToNext());
             }
@@ -440,13 +453,12 @@ public class PageFragment extends Fragment {
                 viewHolder.source = (TextView) convertView.findViewById(R.id.news_source);
 
                 convertView.setTag(viewHolder);
-                if(newses.get(position).getIsClicked() == true) {
+                if(newses.get(position).getIsClicked()) {
                     convertView.setBackgroundColor(Color.parseColor("#A3A3A3"));
                 }
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            //异步加载图片方法
             ImageLoader.getInstance().displayImage(newses.get(position).getImgsrc(), viewHolder.imageView, getDisplayOption());
             viewHolder.copyright.setText(newses.get(position).getTitle());
             viewHolder.source.setText(newses.get(position).getSource());

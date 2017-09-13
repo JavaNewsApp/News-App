@@ -1,31 +1,51 @@
 [
     {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
     },
     {
         "merged": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
         "source": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
     },
     {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
         "source": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
     },
     {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
     },
     {
         "merged": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
-    },
-    {
-        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
-        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
     },
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
@@ -34,6 +54,10 @@
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
         "source": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     },
     {
         "merged": "D:\\Andriod_Application\\git\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
@@ -46,5 +70,13 @@
     {
         "merged": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
         "source": "D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "D:\\home\\yu\\News-App\\BigProject\\D:\\home\\yu\\News-App\\BigProject\\library\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     }
 ]

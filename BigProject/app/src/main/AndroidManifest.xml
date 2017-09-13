@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".AboutMe" />
-        <activity android:name=".CategoryManager" />
         <activity android:name=".Favorites" />
         <activity android:name=".Search" />
         <activity android:name="com.example.ForMoreNews.bigproject.Setting"/>

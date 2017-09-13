@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/share"
         android:orderInCategory="90"
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -14,7 +14,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/like"
-        android:icon="@drawable/grey_favorite"
+        android:icon="@drawable/notlove"
         android:orderInCategory="90"
         android:title="like"
         app:showAsAction="always" />

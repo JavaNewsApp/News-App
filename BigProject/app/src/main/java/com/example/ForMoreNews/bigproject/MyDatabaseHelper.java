@@ -18,6 +18,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 			+ "like text, "
 			+ "body text, "
 			+ "name text, "
+			+ "click text, "
 			+ "category text)";
 
 

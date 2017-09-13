@@ -8,7 +8,8 @@
     </style>
 
     <!--夜间模式主题-->
-    <style name="BaseTheme.Night" parent="Theme.AppCompat.NoActionBar"></style><!--默认主题-->
+    <style name="BaseTheme.Night" parent="Theme.AppCompat.NoActionBar"></style>
+    <!--默认主题-->
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
     <style name="MyActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">?attr/colorPrimary</item>

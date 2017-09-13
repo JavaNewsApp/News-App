@@ -50,7 +50,6 @@ public class Setting extends PreferenceActivity implements OnSharedPreferenceCha
     @Override
     public void onBackPressed(){
         Intent i = new Intent();
-        i.putExtra("gl","Good Luck!");
         setResult(RESULT_OK, i);
         finish();
     }

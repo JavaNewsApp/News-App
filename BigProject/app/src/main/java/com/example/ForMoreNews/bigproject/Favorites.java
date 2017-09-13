@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,11 +24,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Favorites extends BaseActivity {
 
@@ -40,20 +34,13 @@ public class Favorites extends BaseActivity {
     private ListView listView;
     private boolean save;
     private New news;
-    private Retrofit retrofit;
-    private NewsService requestServices;
     private NewDetail detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://166.111.68.66:2042/news/action/query/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        requestServices = retrofit.create(NewsService.class);
+        Log.i("favourite", "" + newses.size());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
@@ -71,30 +58,16 @@ public class Favorites extends BaseActivity {
                 Toast.makeText(Favorites.this, "You clicked:\n" + news.getTitle(),
                         Toast.LENGTH_LONG).show();
                 Log.i("ID", news.getPostid());
-                Call<NewDetail> call = requestServices.getNewDetail(news.getPostid());
-                call.enqueue(new Callback<NewDetail>() {
-                    @Override
-                    public void onResponse(Call<NewDetail> call, Response<NewDetail> response) {
-                        detail = response.body();
 
                         Intent intent = new Intent(Favorites.this, Details.class);
 
-                        intent.putExtra("title", detail.getTitle());
-                        intent.putExtra("body", detail.getBody());
-                        intent.putExtra("source", detail.getSource());
-                        intent.putExtra("picture", detail.getImg());
-                        intent.putStringArrayListExtra("name", detail.getLink());
+                        intent.putExtra("title", news.getTitle());
+                        intent.putExtra("body", news.getBody());
+                        intent.putExtra("source", news.getSource());
+                        intent.putExtra("picture", news.getImgsrc());
+                        intent.putStringArrayListExtra("name", news.getName());
                         intent.putExtra("isLiked", true);
                         startActivityForResult(intent, 2);
-                    }
-
-                    @Override
-                    public void onFailure(Call<NewDetail> call, Throwable t) {
-                        Log.i("LHD", t.getMessage());
-                    }
-                });
-
-
             }
         });
 
@@ -102,7 +75,8 @@ public class Favorites extends BaseActivity {
         ImageLoader.getInstance().init(config);
 
         SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("News", null, "like = ?", new String[]{String.valueOf(1)}, null, null, null);
+        Cursor cursor = db.query("News", null, "like = ?", new String[]{String.valueOf(true)}, null, null, null);
+        //Cursor cursor = db.query("News", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 String title = cursor.getString(cursor
@@ -123,9 +97,12 @@ public class Favorites extends BaseActivity {
                         .getColumnIndex("like"));
                 String name = cursor.getString(cursor
                         .getColumnIndex("name"));
+                String click = cursor.getString(cursor
+                        .getColumnIndex("click"));
+                Log.i("likeboss", like);
 
                 New news = new New();
-                news.add(title, origin, image, id, category, src, body, like, name);
+                news.add(title, origin, image, id, category, src, body, like, name, "false");
                 newses.add(news);
             } while (cursor.moveToNext());
         }
@@ -156,11 +133,11 @@ public class Favorites extends BaseActivity {
     public DisplayImageOptions getDisplayOption() {
         DisplayImageOptions options;
         options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .considerExifParams(true) //是否考虑JPEG图像EXIF参数（旋转，翻转）
-                .imageScaleType(ImageScaleType.EXACTLY)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.ARGB_8888)//设置图片的解码类型//
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
                 .build();//构建完成
         return options;
     }

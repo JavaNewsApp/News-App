@@ -32,7 +32,8 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         num = 0;
         for(int i = 1; i < 13; i++){
             is[i-1] = settings.getBoolean("s"+i, true);
-            if(is[i - 1] == true) {
+            Log.i("is[i]", ""+is[i - 1]);
+            if(is[i - 1]) {
                 num++;
                 titles_show[num - 1] = titles[i-1];
                 categorys_show[num - 1] = categorys[i-1];
@@ -56,7 +57,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position];
+        return titles_show[position];
     }
 }
 

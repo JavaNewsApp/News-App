@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+
     tools:context="com.example.ForMoreNews.bigproject.Details">
 
     <android.support.v7.widget.Toolbar
@@ -14,10 +14,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:theme="@style/MyActionBar">
         <!--app:titleTextAppearance="@style/Toolbar.TitleText"-->
-
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -31,30 +29,49 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/title_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="35px"
+
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:id="@+id/pic_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/title_view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:scrollbars = "none"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/body_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scrollbars = "vertical"
-        android:fadeScrollbars="false"
+            <TextView
+                android:id="@+id/title_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:textSize="35px"
+                />
+
+                <ImageView
+                android:id="@+id/pic_view"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="30dip"
+                />
+
+                <TextView
+                    android:id="@+id/body_view"
+                    android:textSize="32px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     />
+            </LinearLayout>
+        </ScrollView>
+    <ImageButton
+        android:id="@+id/speaker"
+        android:layout_width="25dip"
+        android:layout_height="25dip"
+        android:background="@drawable/speaker"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/pic_view" />
-
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

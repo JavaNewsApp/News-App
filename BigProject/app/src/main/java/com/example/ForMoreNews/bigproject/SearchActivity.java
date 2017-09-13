@@ -33,7 +33,7 @@ public class SearchActivity extends BaseActivity{
         search = intent.getStringExtra("search");
 
         mSearchView = (SearchView) findViewById(R.id.searchView);
-        mSearchView.setSubmitButtonEnabled(true);  //提交按钮
+        mSearchView.setSubmitButtonEnabled(false);  //提交按钮
         mListView = (ListView) findViewById(R.id.listView);
         if(strs.size() > 0) {
             int cnt = 0;
@@ -44,8 +44,6 @@ public class SearchActivity extends BaseActivity{
         }
         mListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, mStrs));
         mListView.setTextFilterEnabled(true);
-        Log.i("search0", "5");
-        // 设置搜索文本监听
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
             @Override
@@ -54,9 +52,10 @@ public class SearchActivity extends BaseActivity{
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if(imm != null){
                         imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+                        mSearchView.clearFocus();
                         doMySearch(query);
                     }
-                    mSearchView.clearFocus();  //不获取焦点
+
                 }
                 return true;
             }
@@ -69,7 +68,6 @@ public class SearchActivity extends BaseActivity{
                 }else{
                     mListView.clearTextFilter();
                 }
-                Log.i("search0", "6");
                 return false;
             }
         });
@@ -79,7 +77,6 @@ public class SearchActivity extends BaseActivity{
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
         handleIntent(intent);
-        Log.i("search0", "7");
     }
 
     private void handleIntent(Intent intent) {
@@ -87,7 +84,6 @@ public class SearchActivity extends BaseActivity{
             String query = intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
         }
-        Log.i("search0", "8");
     }
 
     private void doMySearch(String query) {

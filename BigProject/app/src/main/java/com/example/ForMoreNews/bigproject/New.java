@@ -107,7 +107,7 @@ public class New {
     public void setIsLiked(boolean like) {
         this.liked = like;
     }
-    public void add(String title, String origin, String image, String id, String category, String source, String body, String like, String name) {
+    public void add(String title, String origin, String image, String id, String category, String source, String body, String like, String name, String click) {
         this.news_Pictures = image;
         this.news_Title = title;
         this.news_Author = origin;
@@ -116,6 +116,7 @@ public class New {
         this.news_URL = source;
         this.body = body;
         this.liked = Boolean.parseBoolean(like);
+        this.clicked = Boolean.parseBoolean(click);
         String [] _name = name.split(";");
         for(int i = 0; i < _name.length; i++){
             this.name.add(_name[i]);

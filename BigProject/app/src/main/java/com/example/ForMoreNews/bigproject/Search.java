@@ -81,6 +81,7 @@ public class Search extends BaseActivity {
                             detail = _response.body();
                             search_newses.get(ii).setBody(detail.getBody());
                             search_newses.get(ii).setName(detail.getLink());
+                            Log.i("here", "okok");
 
                         }
 
@@ -166,9 +167,11 @@ public class Search extends BaseActivity {
                         .getColumnIndex("like"));
                 String name = cursor.getString(cursor
                         .getColumnIndex("name"));
+                String click = cursor.getString(cursor
+                        .getColumnIndex("click"));
 
                 New news = new New();
-                news.add(title, origin, image, id, category, src, body, like, name);
+                news.add(title, origin, image, id, category, src, body, like, name, click);
                 search_newses.add(news);
             } while (cursor.moveToNext());
         }
@@ -184,18 +187,20 @@ public class Search extends BaseActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-
+        finish();
+        Intent intent0 = new Intent(Search.this, Search.class);
+        startActivity(intent0);
     }
 
     public DisplayImageOptions getDisplayOption() {
         DisplayImageOptions options;
         options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .considerExifParams(true) //是否考虑JPEG图像EXIF参数（旋转，翻转）
-                .imageScaleType(ImageScaleType.EXACTLY)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.ARGB_8888)//设置图片的解码类型//
-                .build();//构建完成
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .build();
         return options;
     }
 
@@ -227,7 +232,6 @@ public class Search extends BaseActivity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            //异步加载图片方法
             ImageLoader.getInstance().displayImage(search_newses.get(position).getImgsrc(), viewHolder.imageView, getDisplayOption());
             viewHolder.copyright.setText(search_newses.get(position).getTitle());
             viewHolder.source.setText(search_newses.get(position).getSource());

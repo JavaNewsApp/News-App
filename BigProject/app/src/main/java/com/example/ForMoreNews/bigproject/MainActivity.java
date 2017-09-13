@@ -7,10 +7,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -66,6 +65,7 @@ public class MainActivity extends BaseActivity
         switch(requestCode){
             case 6:
                 if(resultCode == RESULT_OK){
+                    Log.i("fffff", "kkkkk");
                     finish();
                     Intent intent0 = new Intent(MainActivity.this, MainActivity.class);
                     startActivity(intent0);
@@ -87,9 +87,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
@@ -98,15 +95,14 @@ public class MainActivity extends BaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.favorite) {
             Intent intent = new Intent(MainActivity.this, Favorites.class);
             startActivity(intent);
         } else if (id == R.id.category) {
-            Intent intent = new Intent(MainActivity.this, CategoryManager.class);
-            startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, Setting.class);
+            startActivityForResult(intent, 6);
         } else if (id == R.id.about_me) {
             Intent intent = new Intent(MainActivity.this, AboutMe.class);
             startActivity(intent);
