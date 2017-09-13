@@ -57,7 +57,6 @@ public class Search extends BaseActivity {
 
         Intent intent = getIntent();
         search = intent.getStringExtra("search");
-        Log.i("search", search);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://166.111.68.66:2042/news/action/query/")

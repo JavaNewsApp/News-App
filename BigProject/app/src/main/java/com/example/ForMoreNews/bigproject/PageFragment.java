@@ -32,6 +32,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -328,6 +330,11 @@ public class PageFragment extends Fragment {
                 intent.putExtra("body", news.getBody());
                 intent.putExtra("source", news.getSource());
                 intent.putExtra("picture", news.getImgsrc());
+                Log.i("outfuckbody", "kkk");
+
+                intent.putStringArrayListExtra("name", news.getName());
+
+                startActivityForResult(intent, 11);
                 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
                 Cursor cursor = db.query("News", null, "title = ?", new String[]{newses.get(position - 1).getTitle()}, null, null, null);
 
@@ -337,7 +344,7 @@ public class PageFragment extends Fragment {
                     intent.putExtra("isLiked", Boolean.parseBoolean(like));
                 }
                 cursor.close();
-
+                Log.i("outfuck", "fuck");
                 ContentValues values = new ContentValues();
 
                 values.put("search", news.getSearch());
@@ -345,9 +352,7 @@ public class PageFragment extends Fragment {
                 db.update("News", values, "title = ?",
                         new String[] {news.getTitle()});
 
-                intent.putStringArrayListExtra("name", news.getName());
 
-                startActivityForResult(intent, 11);
 
             }
         });
@@ -444,15 +449,55 @@ public class PageFragment extends Fragment {
                     else{
                         SQLiteDatabase db0 = MainActivity.dbHelper.getWritableDatabase();
                         Cursor cursor = db0.query("News", null, "click = ?", new String[]{"true"}, null, null, null);
-                        String result;
+                        String result = "";
+                        ArrayList<String> word0 = new ArrayList<>();
+                        ArrayList<Double> num0 = new ArrayList<>();
 
                         if (cursor.moveToFirst()) {
-                            do {
-                                String search = cursor.getString(cursor
-                                        .getColumnIndex("search"));
-                                String [] _search = search.split(";");
+                            String search = cursor.getString(cursor
+                                    .getColumnIndex("search"));
+                            search = "";
+                            if(search != null && search != "") {
+                                do {
 
-                            } while (cursor.moveToNext());
+
+                                    String[] _search = search.split(";");
+                                    for (String a : _search) {
+                                        String[] aa = a.split(",");
+                                        word0.add(aa[0]);
+                                        num0.add(Double.parseDouble(aa[1]));
+                                    }
+
+                                } while (cursor.moveToNext());
+
+                                ArrayList<String> word = new ArrayList<>();
+                                ArrayList<Double> num = new ArrayList<>();
+                                for (int i = 0; i < word0.size(); i++) {
+                                    int flag = 0;
+                                    for (int j = 0; j < word.size(); j++) {
+                                        if (word0.get(i).equals(word.get(j))) {
+                                            flag = 1;
+                                            double temp = num.get(j);
+                                            temp += num0.get(i);
+                                            num.set(j, temp);
+                                        }
+                                    }
+                                    if (flag == 0) {
+                                        num.add(num0.get(i));
+                                        word.add(word0.get(i));
+                                    }
+                                }
+                                double tt = 0;
+                                for (int i = 0; i < num.size(); i++) {
+                                    if (num.get(i) > tt) {
+                                        tt = num.get(i);
+                                        result = word.get(i);
+                                    }
+                                }
+                            }
+                            else {
+                                result = "中国";
+                            }
                         }
                         else {
                             result = "中国";
@@ -501,6 +546,7 @@ public class PageFragment extends Fragment {
                                                 values.put("name", a);
                                                 db.insert("News", null, values);
                                                 values.clear();
+                                                Log.i("initfuck", "fuck");
                                             }
 
                                             @Override
